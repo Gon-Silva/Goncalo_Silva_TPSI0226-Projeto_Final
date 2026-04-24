@@ -1,6 +1,6 @@
 from headers.headers import header_name_store
 from utils.errors import catch_number_error
-from utils.terminal import cls
+from utils.terminal import cls, press_to_continue
 
 
 def main():
@@ -27,7 +27,8 @@ def main():
                 print("Thank you for using")
                 break
             case _:
-                print("[ERROR] Between 1 and 3")
+                print("\n[ERROR] Between 1 and 3")
+                press_to_continue()
 
 
 if __name__ == "__main__":

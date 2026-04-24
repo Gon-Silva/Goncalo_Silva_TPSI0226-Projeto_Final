@@ -1,4 +1,4 @@
-from utils.terminal import name
+from utils.terminal import press_to_continue
 
 
 def catch_number_error(message: str):
@@ -6,5 +6,5 @@ def catch_number_error(message: str):
         return int(input(message))
     except ValueError:
         print("\n[ERROR] The input must be a number")
-        name()
+        press_to_continue()
         return None

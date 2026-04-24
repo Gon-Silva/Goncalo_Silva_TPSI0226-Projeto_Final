@@ -10,6 +10,6 @@ def cls():
 
 
 # Waits for the user to press a button or for two seconds to pass
-def name():
+def press_to_continue():
     time.sleep(2)
     input("\nPress [ENTER] to continue...")
