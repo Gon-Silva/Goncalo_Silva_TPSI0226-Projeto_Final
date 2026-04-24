@@ -1,0 +1,34 @@
+from headers.headers import header_name_store
+from utils.errors import catch_number_error
+from utils.terminal import cls
+
+
+def main():
+
+    while True:
+        cls()
+        print(header_name_store)
+
+        print("[1] - Login")
+        print("[2] - New Account")
+        print("[3] - Leave Program")
+
+        option = catch_number_error("\nSelect an option -> ")
+
+        if option is None:
+            continue
+
+        match option:
+            case 1:
+                pass
+            case 2:
+                pass
+            case 3:
+                print("Thank you for using")
+                break
+            case _:
+                print("[ERROR] Between 1 and 3")
+
+
+if __name__ == "__main__":
+    main()
