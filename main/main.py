@@ -1,4 +1,5 @@
 from headers.headers import header_name_store
+from new_account.new_account import new_account
 from utils.errors import catch_number_error
 from utils.terminal import cls, press_to_continue
 
@@ -22,6 +23,7 @@ def main():
             case 1:
                 pass
             case 2:
+                new_account()
                 pass
             case 3:
                 print("\nThank you for using\n")
