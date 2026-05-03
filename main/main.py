@@ -24,7 +24,7 @@ def main():
             case 2:
                 pass
             case 3:
-                print("Thank you for using")
+                print("\nThank you for using\n")
                 break
             case _:
                 print("\n[ERROR] Between 1 and 3")
