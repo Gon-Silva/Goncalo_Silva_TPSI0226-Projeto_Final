@@ -1,4 +1,4 @@
-from headers.headers import header_login
+from headers.headers import header_new_account
 from utils.errors import catch_number_error
 from utils.terminal import cls, press_to_continue
 
@@ -117,7 +117,7 @@ class New_Account:
 def new_account():
     cls()
 
-    print(header_login)
+    print(header_new_account)
 
     name = input("Name - ")
     age = catch_number_error("Age - ")
