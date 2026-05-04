@@ -16,6 +16,9 @@ def read_json(path: str):
             json.dump(data, file)
         return data
 
+    except json.JSONDecodeError:
+        return {"clients": []}
+
 
 def write_json(path: str, data: dict):
     with open(path, "w") as file:

@@ -4,9 +4,17 @@
       "name": "Gon\u00e7alo",
       "age": 18,
       "phone": "932751667",
-      "email": "goncalo.lee.silva@gmail.com",
-      "password": "Qwerty_123",
+      "email": "g",
+      "password": "g",
       "id": 1
+    },
+    {
+      "name": "Ana",
+      "age": 18,
+      "phone": "932751",
+      "email": "a",
+      "password": "a",
+      "id": 2
     }
   ]
 }
