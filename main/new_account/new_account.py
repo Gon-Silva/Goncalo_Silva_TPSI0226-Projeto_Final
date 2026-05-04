@@ -1,4 +1,5 @@
 from headers.headers import header_new_account
+from new_account.save_account import save_account
 from utils.errors import catch_number_error
 from utils.terminal import cls, press_to_continue
 
@@ -101,6 +102,14 @@ class New_Account:
                             print("\n[ERROR] Between 1 and 5")
                             press_to_continue()
 
+    def to_dict(self) -> dict:
+        return {
+            "name": self.__name,
+            "age": self.__age,
+            "phone": self.__phone,
+            "email": self.__email,
+        }
+
     def confirm(self) -> str:
 
         # Returns a confirmation string summarizing the account details
@@ -129,5 +138,7 @@ def new_account():
     user.before_confirming()
 
     print(user.confirm())
+
+    save_account(user.to_dict())
 
     press_to_continue()

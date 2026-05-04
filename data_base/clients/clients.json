@@ -1,0 +1,11 @@
+{
+  "clients": [
+    {
+      "name": "Gon\u00e7alo",
+      "age": 18,
+      "phone": "932751667",
+      "email": "goncalo.lee.silva@gmail.com",
+      "id": 1
+    }
+  ]
+}

@@ -8,6 +8,7 @@ def read_json(path: str):
             return json.load(file)
 
     except FileNotFoundError:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
         print("File not found")
         print("Create a new file")
         with open(path, "w") as file:

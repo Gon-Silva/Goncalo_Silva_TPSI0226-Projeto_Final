@@ -1,3 +1,5 @@
+import os
+
 from headers.headers import header_name_store
 from new_account.new_account import new_account
 from utils.errors import catch_number_error
@@ -8,6 +10,9 @@ def main():
 
     while True:
         cls()
+
+        print(os.getcwd())
+
         print(header_name_store)
 
         print("[1] - Login")
