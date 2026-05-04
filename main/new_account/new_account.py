@@ -5,13 +5,14 @@ from utils.terminal import cls, press_to_continue
 
 
 class New_Account:
-    def __init__(self, name: str, age: int, phone: str, email: str):
+    def __init__(self, name: str, age: int, phone: str, email: str, password: str):
 
         # Constructor to initialize the account with private attributes
         self.__name = name
         self.__age = age
         self.__phone = phone
         self.__email = email
+        self.__password = password
 
     # Getters (Accessors)
     def get_name(self) -> str:
@@ -25,6 +26,9 @@ class New_Account:
 
     def get_email(self) -> str:
         return self.__email
+
+    def get_password(self) -> str:
+        return self.__password
 
     # Setters (Mutators)
     def set_name(self, name: str) -> None:
@@ -42,6 +46,9 @@ class New_Account:
         if "@" not in email or "." not in email:
             raise ValueError("Invalid email format.")
         self.__email = email
+
+    def set_password(self, password: str) -> None:
+        self.__password = password
 
     # Method
     def before_confirming(self) -> None:
@@ -70,6 +77,7 @@ class New_Account:
                     print("[2] - Age")
                     print("[3] - Phone")
                     print("[4] - Email")
+                    print("[5] - Password")
                     print("[0] - Back")
 
                     number_to_change = catch_number_error(
@@ -80,6 +88,8 @@ class New_Account:
                         continue
 
                     match number_to_change:
+                        case 0:
+                            break
                         case 1:
                             name = input("Name - ")
                             self.set_name(name)
@@ -97,6 +107,8 @@ class New_Account:
                             self.set_email(email)
                             break
                         case 5:
+                            password = input("Password - ")
+                            self.set_password(password)
                             break
                         case _:
                             print("\n[ERROR] Between 1 and 5")
@@ -108,6 +120,7 @@ class New_Account:
             "age": self.__age,
             "phone": self.__phone,
             "email": self.__email,
+            "password": self.__password,
         }
 
     def confirm(self) -> str:
@@ -119,7 +132,8 @@ class New_Account:
             f"Name: {self.__name}\n"
             f"Age: {self.__age}\n"
             f"Phone: {self.__phone}\n"
-            f"Email: {self.__email}"
+            f"Email: {self.__email}\n"
+            f"Password: {self.__password}"
         )
 
 
@@ -132,8 +146,9 @@ def new_account():
     age = catch_number_error("Age - ")
     phone = input("Phone - ")
     email = input("Email - ")
+    password = input("Password - ")
 
-    user = New_Account(name, age, phone, email)
+    user = New_Account(name, age, phone, email, password)
 
     user.before_confirming()
 
