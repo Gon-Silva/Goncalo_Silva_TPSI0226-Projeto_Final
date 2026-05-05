@@ -1,6 +1,5 @@
-import os
-
 from headers.headers import header_name_store
+from login.login import login
 from new_account.new_account import new_account
 from utils.errors import catch_number_error
 from utils.terminal import cls, press_to_continue
@@ -10,8 +9,6 @@ def main():
 
     while True:
         cls()
-
-        print(os.getcwd())
 
         print(header_name_store)
 
@@ -26,6 +23,7 @@ def main():
 
         match option:
             case 1:
+                login()
                 pass
             case 2:
                 new_account()
