@@ -11,3 +11,12 @@ def save_account(client: dict):
     data["clients"].append(client)
 
     write_json("data_base/clients/clients.json", data)
+
+
+def check_email(clients: dict, email: str):
+
+    for client in clients["clients"]:
+        if client["email"] == email:
+            return False
+
+    return True

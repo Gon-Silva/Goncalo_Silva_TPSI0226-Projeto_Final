@@ -1,8 +1,9 @@
 import re
 
 from headers.headers import header_new_account
-from new_account.utils_new_account import save_account
+from new_account.utils_new_account import check_email, save_account
 from utils.errors import catch_number_error
+from utils.files import read_json
 from utils.terminal import cls, press_to_continue
 
 
@@ -54,21 +55,31 @@ class New_Account:
 
         if not re.match(regex_phone, phone):
             print("Invalid phone format")
-        else:
-            print("Success")
-            self.__phone = phone
+            return
+
+        print("Success")
+        self.__phone = phone
 
         press_to_continue()
 
     def set_email(self, email: str) -> None:
 
+        data_clients = read_json("data_base/clients/clients.json")
+
         regex_email = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
 
         if not re.match(regex_email, email):
-            print("Invalid phone format")
-        else:
-            print("Success")
-            self.__email = email
+            print("Invalid email format")
+            press_to_continue()
+            return
+
+        if not check_email(data_clients, email):
+            print("This email address is already in use")
+            press_to_continue()
+            return
+
+        self.__email = email
+        print("Success")
 
         press_to_continue()
 

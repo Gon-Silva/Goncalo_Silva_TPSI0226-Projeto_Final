@@ -15,6 +15,22 @@
       "email": "a",
       "password": "a",
       "id": 2
+    },
+    {
+      "name": "Gon\u00e7alo",
+      "age": 18,
+      "phone": "932751667",
+      "email": "goncalo.lee.silva@gmail.com",
+      "password": "password",
+      "id": 3
+    },
+    {
+      "name": "Gon\u00e7alo Silva",
+      "age": 18,
+      "phone": "932751667",
+      "email": "goncas.lee.silva@gmail.com",
+      "password": "password",
+      "id": 4
     }
   ]
 }
