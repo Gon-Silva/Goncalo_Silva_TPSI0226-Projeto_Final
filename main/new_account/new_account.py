@@ -1,3 +1,5 @@
+import re
+
 from headers.headers import header_new_account
 from new_account.utils_new_account import save_account
 from utils.errors import catch_number_error
@@ -34,18 +36,41 @@ class New_Account:
     def set_name(self, name: str) -> None:
         self.__name = name
 
+        print("Success")
+        press_to_continue()
+
     def set_age(self, age: int) -> None:
-        if age < 0:
-            raise ValueError("Age cannot be negative.")
-        self.__age = age
+        if age < 16:
+            print("Age cannot be negative or under 16 years")
+            press_to_continue()
+        else:
+            print("Success")
+            press_to_continue()
+            self.__age = age
 
     def set_phone(self, phone: str) -> None:
-        self.__phone = phone
+
+        regex_phone = "^\\+?[1-9][0-9]{7,14}$"
+
+        if not re.match(regex_phone, phone):
+            print("Invalid phone format")
+        else:
+            print("Success")
+            self.__phone = phone
+
+        press_to_continue()
 
     def set_email(self, email: str) -> None:
-        if "@" not in email or "." not in email:
-            raise ValueError("Invalid email format.")
-        self.__email = email
+
+        regex_email = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+
+        if not re.match(regex_email, email):
+            print("Invalid phone format")
+        else:
+            print("Success")
+            self.__email = email
+
+        press_to_continue()
 
     def set_password(self, password: str) -> None:
         self.__password = password
@@ -136,24 +161,84 @@ class New_Account:
             f"Password: {self.__password}"
         )
 
+    def show_new_account(self) -> None:
+
+        print(f"Name     - {self.get_name()}")
+        print(f"Age      - {self.get_age()}")
+        print(f"Phone    - {self.get_phone()}")
+        print(f"Email    - {self.get_email()}")
+        print(f"Password - {self.get_password()}")
+
 
 def new_account():
-    cls()
 
-    print(header_new_account)
+    new_user = New_Account("", 0, "", "", "")
+    number = 1
 
-    name = input("Name - ")
-    age = catch_number_error("Age - ")
-    phone = input("Phone - ")
-    email = input("Email - ")
-    password = input("Password - ")
+    while True:
+        cls()
 
-    user = New_Account(name, age, phone, email, password)
+        new_user.show_new_account()
 
-    user.before_confirming()
+        match number:
+            case 1:
+                # Set name
+                print("\nSet Name")
+                name = input("\n > ")
+                new_user.set_name(name)
 
-    print(user.confirm())
+                number += 1
 
-    save_account(user.to_dict())
+            case 2:
+                # Set age
+                print("\nSet Age")
+                age = catch_number_error("\n > ")
+                new_user.set_age(age)
+
+                if new_user.get_age() < 16:
+                    continue
+
+                number += 1
+
+            case 3:
+                # Set phone
+                print("\nSet Phone")
+                phone = input("\n > ")
+                new_user.set_phone(phone)
+
+                if new_user.get_phone() == "":
+                    continue
+
+                number += 1
+
+            case 4:
+                # Set email
+                print("\nSet Email")
+                email = input("\n > ")
+                new_user.set_email(email)
+
+                if new_user.get_email() == "":
+                    continue
+
+                number += 1
+
+            case 5:
+                # Set password
+                print("\nSet Password")
+                password = input("\n > ")
+                new_user.set_password(password)
+
+                number += 1
+
+            case _:
+                break
+
+    new_user.show_new_account()
+
+    new_user.before_confirming()
+
+    print(new_user.confirm())
+
+    save_account(new_user.to_dict())
 
     press_to_continue()
