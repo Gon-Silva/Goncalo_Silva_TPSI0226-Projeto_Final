@@ -31,6 +31,14 @@
       "email": "goncas.lee.silva@gmail.com",
       "password": "password",
       "id": 4
+    },
+    {
+      "name": "Goncalo",
+      "age": 18,
+      "phone": "932751677",
+      "email": "gonca.lee@proton.me",
+      "password": "password",
+      "id": 5
     }
   ]
 }
