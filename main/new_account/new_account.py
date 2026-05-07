@@ -1,5 +1,3 @@
-import re
-
 from headers.headers import header_new_account
 from new_account.model_account import New_Account
 from new_account.utils_new_account import save_account
