@@ -34,34 +34,34 @@ class Setup:
     # Getters for private attributes
     @property
     def name(self) -> str:
-        """Returns the setup name."""
+        """Returns the setup name"""
         return self.__name
 
     @property
     def creation_date(self) -> str:
-        """Returns the creation date."""
+        """Returns the creation date"""
         return self.__creation_date
 
     @property
     def statement_email(self) -> str:
-        """Returns the owner's email address."""
+        """Returns the owner's email address"""
         return self.__statement_email
 
     @property
     def phone(self) -> str:
-        """Returns the phone number."""
+        """Returns the phone number"""
         return self.__phone
 
     @property
     def location(self) -> str:
-        """Returns the full address as a formatted string."""
+        """Returns the full address as a formatted string"""
         loc = self.__location
         return f"{loc['street']}, {loc['city']}, {loc['region']}, {loc['country']}"
 
     # Setters for private attributes
     @name.setter
     def name(self, name: str) -> None:
-        """Set the name."""
+        """Set the name"""
         if not validate_name(name):
             print("Invalid name size")
             press_to_continue()
@@ -71,7 +71,7 @@ class Setup:
 
     @creation_date.setter
     def creation_date(self, creation_date: str) -> None:
-        """Set the date of creation."""
+        """Set the date of creation"""
         if not validate_date(creation_date):
             print("Invalid date format")
             press_to_continue()
@@ -81,7 +81,7 @@ class Setup:
 
     @statement_email.setter
     def statement_email(self, statement_email: str) -> None:
-        """Set the email address."""
+        """Set the email address"""
         if not validate_email(statement_email):
             print("Invalid email format")
             press_to_continue()
@@ -91,7 +91,7 @@ class Setup:
 
     @phone.setter
     def phone(self, phone: str) -> None:
-        """Set the phone number."""
+        """Set the phone number"""
         if not validate_phone(phone):
             print("Invalid phone format")
             press_to_continue()

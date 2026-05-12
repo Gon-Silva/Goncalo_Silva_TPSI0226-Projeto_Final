@@ -1,8 +1,8 @@
 # Path
 from config import STATEMENT_PATH
-from GenericUtlis.errors import catch_number_error
 
 # My library
+from GenericUtlis.errors import catch_number_error
 from GenericUtlis.files import create_json, file_exists
 from GenericUtlis.terminal import cls, press_to_continue
 from Setup.model_setup import Setup
