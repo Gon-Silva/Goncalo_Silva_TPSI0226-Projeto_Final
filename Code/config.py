@@ -6,3 +6,8 @@ EMPLOYEES_PATH = "DataBase/Employees/employees.json"
 RENTALS_PATH = "DataBase/Rentals/rentals.json"
 PLANS_PATH = "DataBase/subscription_plans.json"
 COMMENTS_PATH = "DataBase/Comment/"
+
+
+# Regex verification
+REGEX_PHONE = "^\\+?[1-9][0-9]{7,14}$"
+REGEX_EMAIL = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"

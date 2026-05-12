@@ -1,8 +1,8 @@
-from headers.headers import header_new_account
-from new_account.model_account import New_Account
-from new_account.utils_new_account import save_account
-from utils.errors import catch_number_error
-from utils.terminal import cls, press_to_continue
+from GenericUtlis.errors import catch_number_error
+from GenericUtlis.terminal import cls, press_to_continue
+from Headers.headers import header_new_account
+from NewAccount.model_account import New_Account
+from NewAccount.utils_new_account import save_account
 
 
 def new_account():

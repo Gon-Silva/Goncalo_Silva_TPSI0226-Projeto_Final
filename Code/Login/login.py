@@ -1,7 +1,7 @@
-from headers.headers import header_login
-from login.utils_login import verify_password, verify_user
-from utils.files import read_json
-from utils.terminal import cls, press_to_continue
+from GenericUtlis.files import read_json
+from GenericUtlis.terminal import cls, press_to_continue
+from Headers.headers import header_login
+from Login.utils_login import verify_password, verify_user
 
 
 def login():

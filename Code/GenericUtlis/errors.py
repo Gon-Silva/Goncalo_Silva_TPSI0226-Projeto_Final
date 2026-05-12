@@ -1,4 +1,4 @@
-from utils.terminal import press_to_continue
+from GenericUtlis.terminal import press_to_continue
 
 
 def catch_number_error(message: str):

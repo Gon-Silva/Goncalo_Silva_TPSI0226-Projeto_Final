@@ -1,4 +1,4 @@
-from utils.files import read_json, write_json
+from GenericUtlis.files import read_json, write_json
 
 
 def save_account(client: dict):

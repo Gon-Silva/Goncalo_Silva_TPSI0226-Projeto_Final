@@ -1,14 +1,17 @@
-from headers.headers import header_name_store
-from login.login import login
-from new_account.new_account import new_account
-from utils.errors import catch_number_error
-from utils.terminal import cls, press_to_continue
+from GenericUtlis.errors import catch_number_error
+from GenericUtlis.terminal import cls, press_to_continue
+from Headers.headers import header_name_store
+from Login.login import login
+from NewAccount.new_account import new_account
+from Setup.setup import setup
 
 
 def main():
 
     while True:
         cls()
+
+        setup()
 
         print(header_name_store)
 

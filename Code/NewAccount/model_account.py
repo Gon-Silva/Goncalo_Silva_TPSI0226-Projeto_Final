@@ -1,10 +1,10 @@
 import re
 
-from headers.headers import header_change, header_confirm
-from new_account.utils_new_account import check_email
-from utils.errors import catch_number_error
-from utils.files import read_json
-from utils.terminal import cls, press_to_continue
+from GenericUtlis.errors import catch_number_error
+from GenericUtlis.files import read_json
+from GenericUtlis.terminal import cls, press_to_continue
+from Headers.headers import header_change, header_confirm
+from NewAccount.utils_new_account import check_email
 
 
 class New_Account:

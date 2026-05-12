@@ -1,6 +1,3 @@
-import time
-
-
 # Clean the terminal
 def cls():
     print("\033c", end="")
@@ -11,5 +8,4 @@ def cls():
 
 # Waits for the user to press a button or for two seconds to pass
 def press_to_continue():
-    time.sleep(2)
     input("\nPress [ENTER] to continue...")
