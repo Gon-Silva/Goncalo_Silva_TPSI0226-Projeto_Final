@@ -101,6 +101,7 @@ class Setup:
 
     @location.setter
     def location(self, location: dict) -> None:
+        """Set the location"""
         self.__location = location
 
     # String representation for debugging/logging
