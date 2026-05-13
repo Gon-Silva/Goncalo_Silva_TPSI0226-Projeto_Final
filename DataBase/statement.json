@@ -1,0 +1,11 @@
+{
+  "name": "Random PLay",
+  "creation_date": "20-07-2017",
+  "owners_email": "@random.play",
+  "location": {
+    "street": "Rua Jo\u00e3o XXII",
+    "city": "Amadora",
+    "region": "Grande Lisboa",
+    "country": "Portugal"
+  }
+}
