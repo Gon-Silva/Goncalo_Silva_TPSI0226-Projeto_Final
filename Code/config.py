@@ -11,3 +11,4 @@ COMMENTS_PATH = "DataBase/Comment/"
 # Regex verification
 REGEX_PHONE = "^\\+?[1-9][0-9]{7,14}$"
 REGEX_EMAIL = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+REGEX_EMAIL_SETUP = r"^@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"

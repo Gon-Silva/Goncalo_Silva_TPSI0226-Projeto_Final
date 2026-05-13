@@ -3,12 +3,12 @@ import re
 from datetime import datetime
 
 # Regex code
-from config import REGEX_EMAIL, REGEX_PHONE
+from config import REGEX_EMAIL_SETUP, REGEX_PHONE
 
 
 # Validate the email format
 def validate_email(email: str) -> bool:
-    if re.match(REGEX_EMAIL, email):
+    if re.match(REGEX_EMAIL_SETUP, email):
         return True
 
     return False
