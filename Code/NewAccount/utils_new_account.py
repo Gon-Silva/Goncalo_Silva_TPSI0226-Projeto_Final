@@ -6,24 +6,34 @@ import re
 from config import CLIENTS_PATH, REGEX_EMAIL, REGEX_PHONE
 
 # My Library
-from GenericUtlis.files import create_json, read_json
+from GenericUtlis.files import create_json, file_exists, read_json
 
 
 # Save account in the database
 def save_account(client: dict):
-    data = read_json(CLIENTS_PATH)
 
-    id = len(data["clients"]) + 1
+    check_clients_file()
 
-    client["id"] = id
+    new_data = read_json(CLIENTS_PATH)
 
-    data["clients"].append(client)
+    new_data["clients"].append(client)
 
-    create_json(CLIENTS_PATH, data)
+    create_json(CLIENTS_PATH, new_data)
+
+
+# Checks whether the file exists
+def check_clients_file():
+    if not file_exists(CLIENTS_PATH):
+        create_json(CLIENTS_PATH, {"clients": []})
 
 
 # Check if exists email
-def check_email(clients: dict, email: str):
+def check_email(email: str):
+
+    check_clients_file()
+
+    clients = read_json(CLIENTS_PATH)
+
     for client in clients["clients"]:
         if client["email"] == email:
             return False
@@ -45,3 +55,27 @@ def validate_phone(phone: str) -> bool:
         return True
 
     return False
+
+
+# Validate age
+def validate_age(age: int) -> bool:
+    if age < 16 or age > 99:
+        return False
+
+    return True
+
+
+# Validate the len of password
+def validate_len_password(password: str) -> bool:
+    if len(password) < 8:
+        return False
+
+    return True
+
+
+# Validate the size of name
+def validate_name(name: str):
+    if len(name) == 0:
+        return False
+
+    return True

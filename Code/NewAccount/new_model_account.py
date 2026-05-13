@@ -2,7 +2,10 @@ from GenericUtlis.terminal import press_to_continue
 from NewAccount.utils_new_account import (
     check_email,
     save_account,
+    validate_age,
     validate_email,
+    validate_len_password,
+    validate_name,
     validate_phone,
 )
 
@@ -57,24 +60,24 @@ class NewAccount:
         return self.__phone
 
     @property
-    def is_active(self) -> bool:
-        """Returns account active"""
-        return self.__is_active
-
-    @property
     def email(self) -> str:
         """Returns account email"""
         return self.__email
 
     @property
-    def subscription_plan(self) -> str:
-        """Returns account subscription plan"""
-        return self.__subscription_plan
-
-    @property
     def password(self) -> str:
         """Returns account password"""
         return self.__password
+
+    @property
+    def is_active(self) -> bool:
+        """Returns account active"""
+        return self.__is_active
+
+    @property
+    def subscription_plan(self) -> str:
+        """Returns account subscription plan"""
+        return self.__subscription_plan
 
     # Setters for private attributes
     @id.setter
@@ -85,39 +88,103 @@ class NewAccount:
     @first_name.setter
     def first_name(self, first_name: str) -> None:
         """Set first name"""
+        if not validate_name(first_name):
+            print("Invalid first name size")
+            press_to_continue()
+            return
+
         self.__first_name = first_name
 
     @last_name.setter
     def last_name(self, last_name: str) -> None:
         """Set last name"""
+        if not validate_name(last_name):
+            print("Invalid last name size")
+            press_to_continue()
+            return
+
         self.__last_name = last_name
 
     @age.setter
     def age(self, age: int) -> None:
         """Set age"""
+        if not validate_age(age):
+            print("Invalid age")
+            press_to_continue()
+            return
+
         self.__age = age
 
     @phone.setter
-    def phone(self, age: str) -> None:
+    def phone(self, phone: str) -> None:
         """Set phone"""
-        self.__phone = age
+        if not validate_phone(phone):
+            print("Invalid phone format")
+            press_to_continue()
+            return
+
+        self.__phone = phone
+
+    @email.setter
+    def email(self, email: str) -> None:
+        """Set email"""
+        if not validate_email(email):
+            print("Invalid email format")
+            press_to_continue()
+            return
+
+        self.__email = email
+
+    @password.setter
+    def password(self, password: str) -> None:
+        """Set password"""
+        if not validate_len_password(password):
+            print("Invalid passowrd size")
+            press_to_continue()
+            return
+
+        self.__password = password
 
     @is_active.setter
     def is_active(self, is_active: bool) -> None:
         """Set is active"""
         self.__is_active = is_active
 
-    @email.setter
-    def email(self, email: str) -> None:
-        """Set email"""
-        self.__email = email
-
     @subscription_plan.setter
     def subscription_plan(self, subcription_plan: str) -> None:
         """Set subscription plan"""
         self.__subscription_plan = subcription_plan
 
-    @password.setter
-    def password(self, password: str) -> None:
-        """Set password"""
-        self.__password = password
+    # String representation for debugging/logging
+    def __repr__(self) -> str:
+        return (
+            f"New Account(id -> '{self.__id}'"
+            f"first name -> '{self.__first_name}', "
+            f"last name -> '{self.__last_name}', "
+            f"age -> '{self.__age}', "
+            f"phone -> '{self.__phone}', "
+            f"email -> '{self.__email}', "
+            f"password -> '{self.__password}', "
+            f"subscription plan -> '{self.__subscription_plan}', "
+            f"password '{self.__password}', "
+            f"is active -> '{self.__is_active}')"
+        )
+
+    # String for the user (Need improvement)
+    def __str__(self) -> str:
+        return f"{self.__first_name} | "
+
+    # Convert the class to dict
+    def to_dict(self) -> dict:
+        return {
+            "name": {
+                "first_name": self.__first_name,
+                "last_name": self.__last_name,
+            },
+            "age": self.__age,
+            "phone": self.__phone,
+            "email": self.__email,
+            "password": self.__password,
+            "is_active": self.__is_active,
+            "subscription_plan": self.__subscription_plan,
+        }
