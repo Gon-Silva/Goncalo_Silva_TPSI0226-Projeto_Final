@@ -7,14 +7,7 @@ from GenericUtlis.files import read_json
 from GenericUtlis.terminal import cls, press_to_continue
 from Headers.headers import header_new_account
 from NewAccount.new_model_account import NewAccount
-from NewAccount.utils_new_account import (
-    save_account,
-    validate_age,
-    validate_email,
-    validate_len_password,
-    validate_name,
-    validate_phone,
-)
+from NewAccount.utils_new_account import save_account
 
 
 def new_account():
@@ -141,4 +134,66 @@ def confirm_new_account(new_account: NewAccount):
                 case 1:
                     print(" > First Name")
                     print(" > Ex >> Ana")
-                    new_account.first_name = input(" >> ")
+                    try:
+                        new_account.first_name = input(" >> ")
+                    except ValueError as error:
+                        print(error)
+
+                case 2:
+                    print(" > Last Name")
+                    print(" > Ex >> Silva")
+                    try:
+                        new_account.last_name = input(" >> ")
+                    except ValueError as error:
+                        print(error)
+
+                case 3:
+                    print(" > Age")
+                    print(" > Ex >> 18")
+                    try:
+                        new_account.age = catch_number_error(" >> ")
+
+                    except ValueError as error:
+                        print(error)
+
+                case 4:
+                    print(" > Phone")
+                    print(" > Ex >> 932751849")
+                    try:
+                        new_account.phone = input(" >> ")
+
+                    except ValueError as error:
+                        print(error)
+
+                case 5:
+                    print(" > Email ")
+                    print(" > Ex >> ana.silva@gmail.com")
+                    try:
+                        new_account.email = input(" >> ")
+
+                    except ValueError as error:
+                        print(error)
+
+                case 6:
+                    print(" > Password ")
+                    print(" > Ex >> Dia-45-89&&&asdasd")
+                    try:
+                        new_account.password = input(" >> ")
+
+                    except ValueError as error:
+                        print(error)
+
+                case 0:
+                    print(" > Back to confirmation")
+                    press_to_continue()
+                    pass
+                case _:
+                    print(" > [ ERROR ]")
+                    print(" > Enter a validate option")
+                    press_to_continue()
+                    pass
+
+        else:
+            print(" > [ ERROR ]")
+            print(" > Enter a validate option")
+            press_to_continue()
