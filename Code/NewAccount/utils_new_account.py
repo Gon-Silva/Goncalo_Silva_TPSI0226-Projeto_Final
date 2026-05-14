@@ -6,7 +6,7 @@ import re
 from config import CLIENTS_PATH, REGEX_EMAIL, REGEX_PHONE
 
 # My Library
-from GenericUtlis.files import create_json, file_exists, read_json
+from GenericUtlis.files import create_json, file_exists, read_json, write_json
 
 
 # Save account in the database
@@ -15,16 +15,20 @@ def save_account(client: dict):
     check_clients_file()
 
     new_data = read_json(CLIENTS_PATH)
-
+    new_data["next_id"] += 1
     new_data["clients"].append(client)
 
-    create_json(CLIENTS_PATH, new_data)
+    write_json(CLIENTS_PATH, new_data)
 
 
 # Checks whether the file exists
 def check_clients_file():
     if not file_exists(CLIENTS_PATH):
-        create_json(CLIENTS_PATH, {"clients": []})
+        create_json(CLIENTS_PATH, {"next_id": 1, "clients": []})
+
+    data = read_json(CLIENTS_PATH)
+    if data is None:
+        create_json(CLIENTS_PATH, {"next_id": 1, "clients": []})
 
 
 # Check if exists email

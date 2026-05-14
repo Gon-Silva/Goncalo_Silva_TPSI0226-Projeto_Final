@@ -21,7 +21,13 @@ def main():
         print("[2] - New Account")
         print("[3] - Leave Program")
 
-        option = catch_number_error("\nSelect an option -> ")
+        try:
+            option = catch_number_error("\nSelect an option -> ")
+
+        except ValueError as error:
+            print(error)
+            press_to_continue()
+            continue
 
         if option is None:
             continue

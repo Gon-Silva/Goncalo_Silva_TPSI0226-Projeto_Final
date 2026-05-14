@@ -1,12 +1,13 @@
 {
+  "next_id": 2,
   "clients": [
     {
       "id": 1,
       "name": { "first_name": "Ana", "last_name": "Silva" },
       "age": 18,
-      "phone": "932751849",
+      "phone": "9327518789",
       "email": "ana.silva@gmail.com",
-      "password": "Dia-45-89",
+      "password": "password-97",
       "is_active": true,
       "subscription_plan": "basic"
     }

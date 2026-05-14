@@ -169,12 +169,12 @@ class NewAccount:
     # String for the user (Need improvement)
     def __str__(self) -> str:
         return (
-            f"First Name - {self.__first_name} |"
-            f"Last Name  - {self.__last_name} |"
-            f"Age        - {self.__age} |"
-            f"Phone      - {self.__phone} |"
-            f"Email      - {self.__email} |"
-            f"Password   - {self.__password} |"
+            f" > First Name - {self.__first_name}\n"
+            f" > Last Name - {self.__last_name}\n"
+            f" > Age - {self.__age}\n"
+            f" > Phone - {self.__phone}\n"
+            f" > Email - {self.__email}\n"
+            f" > Password - {self.__password}"
         )
 
     # Convert the class to dict
