@@ -25,10 +25,10 @@ def setup():
 
 def create_setup():
 
-    number = 1
-
     name = creation_date = statement_email = statement_phone = ""
     street = city = region = country = ""
+
+    number = 1
 
     while number <= 5:
         cls()

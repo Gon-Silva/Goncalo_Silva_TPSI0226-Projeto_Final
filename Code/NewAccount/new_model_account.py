@@ -1,7 +1,6 @@
 from GenericUtlis.terminal import press_to_continue
 from NewAccount.utils_new_account import (
     check_email,
-    save_account,
     validate_age,
     validate_email,
     validate_len_password,
@@ -18,20 +17,20 @@ class NewAccount:
         last_name: str,
         age: int,
         phone: str,
-        is_active: bool,
         email: str,
-        subscription_plan: str,
         password: str,
+        is_active: bool,
+        subscription_plan: str,
     ) -> None:
         self.__id = id
         self.__first_name = first_name
         self.__last_name = last_name
         self.__age = age
         self.__phone = phone
-        self.__is_active = is_active
         self.__email = email
-        self.__subscription_plan = subscription_plan
         self.__password = password
+        self.__is_active = is_active
+        self.__subscription_plan = subscription_plan
 
     # Getters for private attributes
     @property
@@ -89,7 +88,7 @@ class NewAccount:
     def first_name(self, first_name: str) -> None:
         """Set first name"""
         if not validate_name(first_name):
-            print("Invalid first name size")
+            raise ValueError("Invalid first name size")
             press_to_continue()
             return
 
@@ -99,7 +98,7 @@ class NewAccount:
     def last_name(self, last_name: str) -> None:
         """Set last name"""
         if not validate_name(last_name):
-            print("Invalid last name size")
+            raise ValueError("Invalid last name size")
             press_to_continue()
             return
 
@@ -109,7 +108,7 @@ class NewAccount:
     def age(self, age: int) -> None:
         """Set age"""
         if not validate_age(age):
-            print("Invalid age")
+            raise ValueError("Invalid age")
             press_to_continue()
             return
 
@@ -119,7 +118,7 @@ class NewAccount:
     def phone(self, phone: str) -> None:
         """Set phone"""
         if not validate_phone(phone):
-            print("Invalid phone format")
+            raise ValueError("Invalid phone format")
             press_to_continue()
             return
 
@@ -129,7 +128,12 @@ class NewAccount:
     def email(self, email: str) -> None:
         """Set email"""
         if not validate_email(email):
-            print("Invalid email format")
+            raise ValueError("Invalid email format")
+            press_to_continue()
+            return
+
+        if not check_email(email):
+            raise ValueError("This email address already exists")
             press_to_continue()
             return
 
@@ -139,7 +143,7 @@ class NewAccount:
     def password(self, password: str) -> None:
         """Set password"""
         if not validate_len_password(password):
-            print("Invalid passowrd size")
+            raise ValueError("Invalid passowrd size")
             press_to_continue()
             return
 
