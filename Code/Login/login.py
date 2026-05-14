@@ -1,3 +1,4 @@
+from config import CLIENTS_PATH
 from GenericUtlis.files import read_json
 from GenericUtlis.terminal import cls, press_to_continue
 from Headers.headers import header_login
@@ -6,7 +7,7 @@ from Login.utils_login import verify_password, verify_user
 
 def login():
 
-    data_clients = read_json("data_base/clients/clients.json")
+    data_clients = read_json(CLIENTS_PATH)
     number_of_attempts = 5
 
     while True:

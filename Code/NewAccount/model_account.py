@@ -1,164 +1,194 @@
-import re
+from GenericUtlis.terminal import press_to_continue
+from NewAccount.utils_new_account import (
+    check_email,
+    validate_age,
+    validate_email,
+    validate_len_password,
+    validate_name,
+    validate_phone,
+)
 
-from GenericUtlis.errors import catch_number_error
-from GenericUtlis.files import read_json
-from GenericUtlis.terminal import cls, press_to_continue
-from Headers.headers import header_change, header_confirm
-from NewAccount.utils_new_account import check_email
 
-
-class New_Account:
-    def __init__(self, name: str, age: int, phone: str, email: str, password: str):
-
-        # Constructor to initialize the account with private attributes
-        self.__name = name
+class NewAccount:
+    def __init__(
+        self,
+        id: int,
+        first_name: str,
+        last_name: str,
+        age: int,
+        phone: str,
+        email: str,
+        password: str,
+        is_active: bool,
+        subscription_plan: str,
+    ) -> None:
+        self.__id = id
+        self.__first_name = first_name
+        self.__last_name = last_name
         self.__age = age
         self.__phone = phone
         self.__email = email
         self.__password = password
+        self.__is_active = is_active
+        self.__subscription_plan = subscription_plan
 
-    # Getters (Accessors)
-    def get_name(self) -> str:
-        return self.__name
+    # Getters for private attributes
+    @property
+    def id(self) -> int:
+        """Returns account id"""
+        return self.__id
 
-    def get_age(self) -> int:
+    @property
+    def first_name(self) -> str:
+        """Returns account first name"""
+        return self.__first_name
+
+    @property
+    def last_name(self) -> str:
+        """Returns account last name"""
+        return self.__last_name
+
+    @property
+    def age(self) -> int:
+        """Returns account age"""
         return self.__age
 
-    def get_phone(self) -> str:
+    @property
+    def phone(self) -> str:
+        """Returns account phone"""
         return self.__phone
 
-    def get_email(self) -> str:
+    @property
+    def email(self) -> str:
+        """Returns account email"""
         return self.__email
 
-    def get_password(self) -> str:
+    @property
+    def password(self) -> str:
+        """Returns account password"""
         return self.__password
 
-    # Setters (Mutators)
-    def set_name(self, name: str) -> None:
-        self.__name = name
+    @property
+    def is_active(self) -> bool:
+        """Returns account active"""
+        return self.__is_active
 
-    def set_age(self, age: int) -> None:
-        if age < 16:
-            print("Age cannot be negative or under 16 years")
-            press_to_continue()
+    @property
+    def subscription_plan(self) -> str:
+        """Returns account subscription plan"""
+        return self.__subscription_plan
+
+    # Setters for private attributes
+    @id.setter
+    def id(self, id: int) -> None:
+        """Set id"""
+        self.__id = id
+
+    @first_name.setter
+    def first_name(self, first_name: str) -> None:
+        """Set first name"""
+        if not validate_name(first_name):
+            raise ValueError("Invalid first name size")
+            return
+
+        self.__first_name = first_name
+
+    @last_name.setter
+    def last_name(self, last_name: str) -> None:
+        """Set last name"""
+        if not validate_name(last_name):
+            raise ValueError("Invalid last name size")
+            return
+
+        self.__last_name = last_name
+
+    @age.setter
+    def age(self, age: int) -> None:
+        """Set age"""
+        if not validate_age(age):
+            raise ValueError("Invalid age")
             return
 
         self.__age = age
 
-    def set_phone(self, phone: str) -> None:
-
-        regex_phone = "^\\+?[1-9][0-9]{7,14}$"
-
-        if not re.match(regex_phone, phone):
-            print("Invalid phone format")
-            press_to_continue()
+    @phone.setter
+    def phone(self, phone: str) -> None:
+        """Set phone"""
+        if not validate_phone(phone):
+            raise ValueError("Invalid phone format")
             return
 
         self.__phone = phone
 
-    def set_email(self, email: str) -> None:
-
-        data_clients = read_json("data_base/clients/clients.json")
-
-        regex_email = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-
-        if not re.match(regex_email, email):
-            print("Invalid email format")
-            press_to_continue()
+    @email.setter
+    def email(self, email: str) -> None:
+        """Set email"""
+        if not validate_email(email):
+            raise ValueError("Invalid email format")
             return
 
-        if not check_email(data_clients, email):
-            print("This email address is already in use")
-            press_to_continue()
+        if not check_email(email):
+            raise ValueError("This email address already exists")
             return
 
         self.__email = email
 
-    def set_password(self, password: str) -> None:
+    @password.setter
+    def password(self, password: str) -> None:
+        """Set password"""
+        if not validate_len_password(password):
+            raise ValueError("Invalid passowrd size")
+            return
+
         self.__password = password
 
-    # Method
-    def before_confirming(self) -> None:
+    @is_active.setter
+    def is_active(self, is_active: bool) -> None:
+        """Set is active"""
+        self.__is_active = is_active
 
-        while True:
-            cls()
+    @subscription_plan.setter
+    def subscription_plan(self, subcription_plan: str) -> None:
+        """Set subscription plan"""
+        self.__subscription_plan = subcription_plan
 
-            print(header_confirm)
+    # String representation for debugging/logging
+    def __repr__(self) -> str:
+        return (
+            f"New Account(id -> '{self.__id}'"
+            f"first name -> '{self.__first_name}', "
+            f"last name -> '{self.__last_name}', "
+            f"age -> '{self.__age}', "
+            f"phone -> '{self.__phone}', "
+            f"email -> '{self.__email}', "
+            f"password -> '{self.__password}', "
+            f"subscription plan -> '{self.__subscription_plan}', "
+            f"is active -> '{self.__is_active}')"
+        )
 
-            self.show_new_account()
+    # String for the user (Need improvement)
+    def __str__(self) -> str:
+        return (
+            f" > First Name - {self.__first_name}\n"
+            f" > Last Name - {self.__last_name}\n"
+            f" > Age - {self.__age}\n"
+            f" > Phone - {self.__phone}\n"
+            f" > Email - {self.__email}\n"
+            f" > Password - {self.__password}"
+        )
 
-            want_change = input(
-                "\nDo you want to change something [y or n] -> "
-            ).lower()
-
-            if not want_change == "y" and not want_change == "n":
-                print("\nPlease select y or n")
-                press_to_continue()
-                continue
-
-            if want_change == "n":
-                return
-
-            if want_change == "y":
-                while True:
-                    cls()
-
-                    print(header_change)
-
-                    print("[1] - Name")
-                    print("[2] - Age")
-                    print("[3] - Phone")
-                    print("[4] - Email")
-                    print("[5] - Password")
-                    print("[0] - Back")
-
-                    number_to_change = catch_number_error(
-                        "\nSelect an option do you want change -> "
-                    )
-
-                    if number_to_change is None:
-                        continue
-
-                    match number_to_change:
-                        case 0:
-                            break
-                        case 1:
-                            name = input("\nSet Name - > ")
-                            self.set_name(name)
-                            break
-                        case 2:
-                            age = catch_number_error("\nSet Age -> ")
-                            self.set_age(age)
-                            break
-                        case 3:
-                            phone = input("\nSet Phone -> ")
-                            self.set_phone(phone)
-                            break
-                        case 4:
-                            email = input("\nSet Email -> ")
-                            self.set_email(email)
-                            break
-                        case 5:
-                            password = input("\nSet Password -> ")
-                            self.set_password(password)
-                            break
-                        case _:
-                            print("\n[ERROR] Between 1 and 5")
-                            press_to_continue()
-
+    # Convert the class to dict
     def to_dict(self) -> dict:
         return {
-            "name": self.__name,
+            "id": self.__id,
+            "name": {
+                "first_name": self.__first_name,
+                "last_name": self.__last_name,
+            },
             "age": self.__age,
             "phone": self.__phone,
             "email": self.__email,
             "password": self.__password,
+            "is_active": self.__is_active,
+            "subscription_plan": self.__subscription_plan,
         }
-
-    def show_new_account(self) -> None:
-
-        print(f"Name     - {self.get_name()}")
-        print(f"Age      - {self.get_age()}")
-        print(f"Phone    - {self.get_phone()}")
-        print(f"Email    - {self.get_email()}")
-        print(f"Password - {self.get_password()}")

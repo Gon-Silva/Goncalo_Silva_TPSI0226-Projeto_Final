@@ -2,8 +2,7 @@ from GenericUtlis.errors import catch_number_error
 from GenericUtlis.terminal import cls, press_to_continue
 from Headers.headers import header_name_store
 from Login.login import login
-
-# from NewAccount.new_account import new_account
+from NewAccount.new_account import new_account
 from Setup.setup import setup
 
 
@@ -14,13 +13,21 @@ def main():
 
         setup()
 
+        cls()
+
         print(header_name_store)
 
         print("[1] - Login")
         print("[2] - New Account")
         print("[3] - Leave Program")
 
-        option = catch_number_error("\nSelect an option -> ")
+        try:
+            option = catch_number_error("\nSelect an option -> ")
+
+        except ValueError as error:
+            print(error)
+            press_to_continue()
+            continue
 
         if option is None:
             continue
@@ -30,7 +37,7 @@ def main():
                 login()
                 pass
             case 2:
-                # new_account()
+                new_account()
                 pass
             case 3:
                 print("\nThank you for using\n")
