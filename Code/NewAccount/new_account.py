@@ -12,7 +12,9 @@ from NewAccount.utils_new_account import save_account
 
 def new_account():
 
-    create_account()
+    new_account = create_account()
+
+    confirm_new_account(new_account)
 
 
 def create_account():
@@ -31,6 +33,8 @@ def create_account():
 
         print(header_new_account)
 
+        print(new_account)
+
         match number:
             case 1:
                 print(" > First Name")
@@ -40,6 +44,7 @@ def create_account():
 
                 except ValueError as error:
                     print(error)
+                    press_to_continue()
                     continue
 
                 number += 1
@@ -51,6 +56,7 @@ def create_account():
                     new_account.last_name = input(" >> ")
                 except ValueError as error:
                     print(error)
+                    press_to_continue()
                     continue
 
                 number += 1
@@ -63,6 +69,7 @@ def create_account():
 
                 except ValueError as error:
                     print(error)
+                    press_to_continue()
                     continue
 
                 number += 1
@@ -75,6 +82,7 @@ def create_account():
 
                 except ValueError as error:
                     print(error)
+                    press_to_continue()
                     continue
 
                 number += 1
@@ -87,6 +95,7 @@ def create_account():
 
                 except ValueError as error:
                     print(error)
+                    press_to_continue()
                     continue
 
                 number += 1
@@ -99,6 +108,7 @@ def create_account():
 
                 except ValueError as error:
                     print(error)
+                    press_to_continue()
                     continue
 
                 number += 1
@@ -140,6 +150,7 @@ def confirm_new_account(new_account: NewAccount):
                         new_account.first_name = input(" >> ")
                     except ValueError as error:
                         print(error)
+                        press_to_continue()
 
                 case 2:
                     print(" > Last Name")
@@ -148,6 +159,7 @@ def confirm_new_account(new_account: NewAccount):
                         new_account.last_name = input(" >> ")
                     except ValueError as error:
                         print(error)
+                        press_to_continue()
 
                 case 3:
                     print(" > Age")
@@ -157,6 +169,7 @@ def confirm_new_account(new_account: NewAccount):
 
                     except ValueError as error:
                         print(error)
+                        press_to_continue()
 
                 case 4:
                     print(" > Phone")
@@ -175,6 +188,7 @@ def confirm_new_account(new_account: NewAccount):
 
                     except ValueError as error:
                         print(error)
+                        press_to_continue()
 
                 case 6:
                     print(" > Password ")
@@ -184,6 +198,7 @@ def confirm_new_account(new_account: NewAccount):
 
                     except ValueError as error:
                         print(error)
+                        press_to_continue()
 
                 case 0:
                     print(" > Back to confirmation")

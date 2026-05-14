@@ -89,7 +89,6 @@ class NewAccount:
         """Set first name"""
         if not validate_name(first_name):
             raise ValueError("Invalid first name size")
-            press_to_continue()
             return
 
         self.__first_name = first_name
@@ -99,7 +98,6 @@ class NewAccount:
         """Set last name"""
         if not validate_name(last_name):
             raise ValueError("Invalid last name size")
-            press_to_continue()
             return
 
         self.__last_name = last_name
@@ -109,7 +107,6 @@ class NewAccount:
         """Set age"""
         if not validate_age(age):
             raise ValueError("Invalid age")
-            press_to_continue()
             return
 
         self.__age = age
@@ -119,7 +116,6 @@ class NewAccount:
         """Set phone"""
         if not validate_phone(phone):
             raise ValueError("Invalid phone format")
-            press_to_continue()
             return
 
         self.__phone = phone
@@ -129,12 +125,10 @@ class NewAccount:
         """Set email"""
         if not validate_email(email):
             raise ValueError("Invalid email format")
-            press_to_continue()
             return
 
         if not check_email(email):
             raise ValueError("This email address already exists")
-            press_to_continue()
             return
 
         self.__email = email
@@ -144,7 +138,6 @@ class NewAccount:
         """Set password"""
         if not validate_len_password(password):
             raise ValueError("Invalid passowrd size")
-            press_to_continue()
             return
 
         self.__password = password
@@ -170,17 +163,24 @@ class NewAccount:
             f"email -> '{self.__email}', "
             f"password -> '{self.__password}', "
             f"subscription plan -> '{self.__subscription_plan}', "
-            f"password '{self.__password}', "
             f"is active -> '{self.__is_active}')"
         )
 
     # String for the user (Need improvement)
     def __str__(self) -> str:
-        return f"{self.__first_name} | "
+        return (
+            f"First Name - {self.__first_name} |"
+            f"Last Name  - {self.__last_name} |"
+            f"Age        - {self.__age} |"
+            f"Phone      - {self.__phone} |"
+            f"Email      - {self.__email} |"
+            f"Password   - {self.__password} |"
+        )
 
     # Convert the class to dict
     def to_dict(self) -> dict:
         return {
+            "id": self.__id,
             "name": {
                 "first_name": self.__first_name,
                 "last_name": self.__last_name,

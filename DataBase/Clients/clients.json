@@ -1,44 +1,14 @@
 {
   "clients": [
     {
-      "name": "Gon\u00e7alo",
+      "id": 1,
+      "name": { "first_name": "Ana", "last_name": "Silva" },
       "age": 18,
-      "phone": "932751667",
-      "email": "g",
-      "password": "g",
-      "id": 1
-    },
-    {
-      "name": "Ana",
-      "age": 18,
-      "phone": "932751",
-      "email": "a",
-      "password": "a",
-      "id": 2
-    },
-    {
-      "name": "Gon\u00e7alo",
-      "age": 18,
-      "phone": "932751667",
-      "email": "goncalo.lee.silva@gmail.com",
-      "password": "password",
-      "id": 3
-    },
-    {
-      "name": "Gon\u00e7alo Silva",
-      "age": 18,
-      "phone": "932751667",
-      "email": "goncas.lee.silva@gmail.com",
-      "password": "password",
-      "id": 4
-    },
-    {
-      "name": "Goncalo",
-      "age": 18,
-      "phone": "932751677",
-      "email": "gonca.lee@proton.me",
-      "password": "password",
-      "id": 5
+      "phone": "932751849",
+      "email": "ana.silva@gmail.com",
+      "password": "Dia-45-89",
+      "is_active": true,
+      "subscription_plan": "basic"
     }
   ]
 }
