@@ -3,7 +3,7 @@ import re
 
 # Regex code
 # My Path
-from config import CLIENTS_PATH, REGEX_EMAIL, REGEX_PHONE
+from config import CLIENTS_PATH, EMPLOYEES_PATH, REGEX_EMAIL, REGEX_NIF, REGEX_PHONE
 
 # My Library
 from GenericUtlis.files import create_json, file_exists, read_json, write_json
@@ -32,7 +32,7 @@ def check_clients_file():
 
 
 # Check if exists email
-def check_email(email: str):
+def check_email(email: str) -> bool:
 
     check_clients_file()
 
@@ -40,6 +40,43 @@ def check_email(email: str):
 
     for client in clients["clients"]:
         if client["email"] == email:
+            return False
+
+    return True
+
+
+# Check if exists phone
+def check_phone(phone: str) -> bool:
+
+    check_clients_file()
+
+    clients = read_json(CLIENTS_PATH)
+    for client in clients["clients"]:
+        if client["phone"] == phone:
+            return False
+
+    employees = read_json(EMPLOYEES_PATH)
+    for employee in employees["employees"]:
+        if employee["phone"] == phone:
+            return False
+
+    return True
+
+
+# Check if exists nif
+def check_nif(nif: str) -> bool:
+
+    check_clients_file()
+
+    clients = read_json(CLIENTS_PATH)
+
+    for client in clients["clients"]:
+        if client["nif"] == nif:
+            return False
+
+    employees = read_json(EMPLOYEES_PATH)
+    for employee in employees["employees"]:
+        if employee["nif"] == nif:
             return False
 
     return True
@@ -78,8 +115,15 @@ def validate_len_password(password: str) -> bool:
 
 
 # Validate the size of name
-def validate_name(name: str):
+def validate_name(name: str) -> bool:
     if len(name) == 0:
         return False
 
     return True
+
+
+def validate_nif(nif: str) -> bool:
+    if re.match(REGEX_NIF, nif):
+        return True
+
+    return False

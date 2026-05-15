@@ -6,7 +6,7 @@ from GenericUtlis.errors import catch_number_error
 from GenericUtlis.files import read_json
 from GenericUtlis.terminal import cls, press_to_continue
 from Headers.headers import header_confirm, header_new_account
-from NewAccount.model_account import NewAccount
+from NewAccount.model_account import NewClient
 from NewAccount.utils_new_account import check_clients_file, save_account
 
 
@@ -28,11 +28,11 @@ def create_account():
 
     new_id = clients_db["next_id"]
 
-    new_account = NewAccount(new_id, "", "", 0, "", "", "", True, "basic")
+    new_account = NewClient(new_id, "", "", 0, "", "", "", "", True, "basic")
 
     number = 1
 
-    while number <= 6:
+    while number <= 7:
         cls()
 
         print(header_new_account)
@@ -90,6 +90,32 @@ def create_account():
                 number += 1
 
             case 5:
+                print("\n > Do you want to enter your tax ID number?")
+                print(" > [ Y | N ]")
+                confirmation = input(" >> ").upper()
+
+                if confirmation == "Y":
+                    print("\n > NIF")
+                    print(" > Ex >> 267887954")
+                    try:
+                        new_account.nif = input(" >> ")
+
+                    except ValueError as error:
+                        print(error)
+                        press_to_continue()
+                        continue
+
+                    number += 1
+
+                elif confirmation == "N":
+                    number += 1
+
+                else:
+                    print("\n > [ ERROR ]")
+                    print(" > Enter a validate option")
+                    press_to_continue()
+
+            case 6:
                 print("\n > Email ")
                 print(" > Ex >> ana.silva@gmail.com")
                 try:
@@ -102,7 +128,7 @@ def create_account():
 
                 number += 1
 
-            case 6:
+            case 7:
                 print("\n > Password ")
                 print(" > Ex >> Dia-45-89&&&asdasd")
                 try:
@@ -118,7 +144,7 @@ def create_account():
     return new_account
 
 
-def confirm_new_account(new_account: NewAccount):
+def confirm_new_account(new_account: NewClient):
     while True:
         cls()
 
@@ -146,8 +172,9 @@ def confirm_new_account(new_account: NewAccount):
             print(" [ 2 ] - Last Name")
             print(" [ 3 ] - Age")
             print(" [ 4 ] - Phone")
-            print(" [ 5 ] - Email")
-            print(" [ 6 ] - Password")
+            print(" [ 5 ] - NIF")
+            print(" [ 6 ] - Email")
+            print(" [ 7 ] - Password")
             print(" [ 0 ] - Exit ")
 
             change_option = catch_number_error("\n >> ")
@@ -189,8 +216,19 @@ def confirm_new_account(new_account: NewAccount):
 
                     except ValueError as error:
                         print(error)
+                        press_to_continue()
 
                 case 5:
+                    print("\n > NIF")
+                    print(" > Ex >> 267887954")
+                    try:
+                        new_account.nif = input(" >> ")
+
+                    except ValueError as error:
+                        print(error)
+                        press_to_continue()
+
+                case 6:
                     print("\n > Email ")
                     print(" > Ex >> ana.silva@gmail.com")
                     try:
@@ -200,7 +238,7 @@ def confirm_new_account(new_account: NewAccount):
                         print(error)
                         press_to_continue()
 
-                case 6:
+                case 7:
                     print("\n > Password ")
                     print(" > Ex >> Dia-45-89&&&asdasd")
                     try:
@@ -214,6 +252,7 @@ def confirm_new_account(new_account: NewAccount):
                     print("\n > Back to confirmation")
                     press_to_continue()
                     pass
+
                 case _:
                     print("\n > [ ERROR ]")
                     print(" > Enter a validate option")
