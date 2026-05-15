@@ -3,7 +3,7 @@ import re
 
 # Regex code
 # My Path
-from config import CLIENTS_PATH, REGEX_EMAIL, REGEX_NIF, REGEX_PHONE
+from config import CLIENTS_PATH, EMPLOYEES_PATH, REGEX_EMAIL, REGEX_NIF, REGEX_PHONE
 
 # My Library
 from GenericUtlis.files import create_json, file_exists, read_json, write_json
@@ -55,6 +55,11 @@ def check_phone(phone: str) -> bool:
         if client["phone"] == phone:
             return False
 
+    employees = read_json(EMPLOYEES_PATH)
+    for employee in employees["employees"]:
+        if employee["phone"] == phone:
+            return False
+
     return True
 
 
@@ -67,6 +72,11 @@ def check_nif(nif: str) -> bool:
 
     for client in clients["clients"]:
         if client["nif"] == nif:
+            return False
+
+    employees = read_json(EMPLOYEES_PATH)
+    for employee in employees["employees"]:
+        if employee["nif"] == nif:
             return False
 
     return True
@@ -114,6 +124,6 @@ def validate_name(name: str) -> bool:
 
 def validate_nif(nif: str) -> bool:
     if re.match(REGEX_NIF, nif):
-        return False
+        return True
 
-    return True
+    return False
