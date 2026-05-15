@@ -5,9 +5,10 @@
       "id": 1,
       "name": { "first_name": "Ana", "last_name": "Silva" },
       "age": 18,
-      "phone": "9327518789",
+      "phone": "93275144",
+      "nif": "267887954",
       "email": "ana.silva@gmail.com",
-      "password": "password-97",
+      "password": "Dia-4589",
       "is_active": true,
       "subscription_plan": "basic"
     }
