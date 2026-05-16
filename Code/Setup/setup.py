@@ -6,12 +6,6 @@ from GenericUtlis.errors import catch_number_error
 from GenericUtlis.files import create_json, file_exists
 from GenericUtlis.terminal import cls, press_to_continue
 from Setup.model_setup import Setup
-from Setup.setup_utils import (
-    validate_date,
-    validate_email,
-    validate_name,
-    validate_phone,
-)
 
 
 def setup():
@@ -25,8 +19,7 @@ def setup():
 
 def create_setup():
 
-    name = creation_date = statement_email = statement_phone = ""
-    street = city = region = country = ""
+    setup = Setup("", "", "", "", "", "", "", "")
 
     number = 1
 
@@ -37,10 +30,11 @@ def create_setup():
             case 1:
                 print(" > Name of Statement")
                 print(" > Ex >> Random Play")
-                name = input(" >> ")
+                try:
+                    setup.name = input(" >> ")
 
-                if not validate_name(name):
-                    print("Invalid name size")
+                except ValueError as error:
+                    print(error)
                     press_to_continue()
                     continue
 
@@ -48,10 +42,11 @@ def create_setup():
             case 2:
                 print(" > Creation date of Statement")
                 print(" > Ex >> 20-04-2007")
-                creation_date = input(" >> ")
+                try:
+                    setup.creation_date = input(" >> ")
 
-                if not validate_date(creation_date):
-                    print("Invalid date format")
+                except ValueError as error:
+                    print(error)
                     press_to_continue()
                     continue
 
@@ -59,10 +54,11 @@ def create_setup():
             case 3:
                 print(" > Statement email ")
                 print(" > Ex >> @random.play")
-                statement_email = input(" >> ")
+                try:
+                    setup.statement_email = input(" >> ")
 
-                if not validate_email(statement_email):
-                    print("Invalid email format")
+                except ValueError as error:
+                    print(error)
                     press_to_continue()
                     continue
 
@@ -71,10 +67,11 @@ def create_setup():
             case 4:
                 print(" > Statement phone ")
                 print(" > Ex >> 936666666")
-                statement_phone = input(" >> ")
+                try:
+                    setup.statement_phone = input(" >> ")
 
-                if not validate_phone(statement_phone):
-                    print("Invalid phone format")
+                except ValueError as error:
+                    print(error)
                     press_to_continue()
                     continue
 
@@ -98,18 +95,16 @@ def create_setup():
                 print(" > Ex >> Portugal")
                 country = input(" >> ")
 
+                setup.location = {
+                    "street": street,
+                    "city": city,
+                    "region": region,
+                    "country": country,
+                }
+
                 number += 1
 
-    return Setup(
-        name,
-        creation_date,
-        statement_email,
-        statement_phone,
-        street,
-        city,
-        region,
-        country,
-    )
+    return setup
 
 
 def confirm_setup(setup: Setup):
@@ -141,26 +136,46 @@ def confirm_setup(setup: Setup):
                 case 1:
                     print(" > Name of Statement")
                     print(" > Ex >> Random Play")
-                    setup.name = input(" >> ")
-                    pass
+                    try:
+                        setup.name = input(" >> ")
+
+                    except ValueError as error:
+                        print(error)
+                        press_to_continue()
+                        continue
 
                 case 2:
                     print(" > Creation date of Statement")
                     print(" > Ex >> 20-04-2007")
-                    setup.creation_date = input(" >> ")
-                    pass
+                    try:
+                        setup.creation_date = input(" >> ")
+
+                    except ValueError as error:
+                        print(error)
+                        press_to_continue()
+                        continue
 
                 case 3:
                     print(" > Statement email ")
                     print(" > Ex >> @random.play")
-                    setup.statement_email = input(" >> ")
-                    pass
+                    try:
+                        setup.statement_email = input(" >> ")
+
+                    except ValueError as error:
+                        print(error)
+                        press_to_continue()
+                        continue
 
                 case 4:
                     print(" > Statement phone ")
                     print(" > Ex >> 936666666")
-                    setup.phone = input(" >> ")
-                    pass
+                    try:
+                        setup.statement_phone = input(" >> ")
+
+                    except ValueError as error:
+                        print(error)
+                        press_to_continue()
+                        continue
 
                 case 5:
                     print(" > Location ")

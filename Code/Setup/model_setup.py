@@ -1,5 +1,4 @@
 # My library
-from GenericUtlis.terminal import press_to_continue
 from Setup.setup_utils import (
     validate_date,
     validate_email,
@@ -14,7 +13,7 @@ class Setup:
         name: str,
         creation_date: str,
         statement_email: str,
-        phone: str,
+        statement_phone: str,
         street: str,
         city: str,
         region: str,
@@ -23,7 +22,7 @@ class Setup:
         self.__name = name
         self.__creation_date = creation_date
         self.__statement_email = statement_email
-        self.__phone = phone
+        self.__statement_phone = statement_phone
         self.__location = {
             "street": street,
             "city": city,
@@ -48,9 +47,9 @@ class Setup:
         return self.__statement_email
 
     @property
-    def phone(self) -> str:
+    def statement_phone(self) -> str:
         """Returns the phone number"""
-        return self.__phone
+        return self.__statement_phone
 
     @property
     def location(self) -> str:
@@ -63,9 +62,7 @@ class Setup:
     def name(self, name: str) -> None:
         """Set the name"""
         if not validate_name(name):
-            print("Invalid name size")
-            press_to_continue()
-            return
+            raise ValueError("Invalid name size")
 
         self.__name = name
 
@@ -73,9 +70,7 @@ class Setup:
     def creation_date(self, creation_date: str) -> None:
         """Set the date of creation"""
         if not validate_date(creation_date):
-            print("Invalid date format")
-            press_to_continue()
-            return
+            raise ValueError("Invalid date format")
 
         self.__creation_date = creation_date
 
@@ -83,21 +78,17 @@ class Setup:
     def statement_email(self, statement_email: str) -> None:
         """Set the email address"""
         if not validate_email(statement_email):
-            print("Invalid email format")
-            press_to_continue()
-            return
+            raise ValueError("Invalid email format")
 
         self.__statement_email = statement_email
 
-    @phone.setter
-    def phone(self, phone: str) -> None:
+    @statement_phone.setter
+    def statement_phone(self, statement_phone: str) -> None:
         """Set the phone number"""
-        if not validate_phone(phone):
-            print("Invalid phone format")
-            press_to_continue()
-            return
+        if not validate_phone(statement_phone):
+            raise ValueError("Invalid phone format")
 
-        self.__phone = phone
+        self.__statement_phone = statement_phone
 
     @location.setter
     def location(self, location: dict) -> None:
