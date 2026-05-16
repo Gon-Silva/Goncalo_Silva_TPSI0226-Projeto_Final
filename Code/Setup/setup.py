@@ -1,20 +1,26 @@
 # Path
-from config import STATEMENT_PATH
+from config import EMPLOYEES_PATH, VIDEO_RENTAL_STORE_PATH
 
 # My library
 from GenericUtlis.errors import catch_number_error
 from GenericUtlis.files import create_json, file_exists
 from GenericUtlis.terminal import cls, press_to_continue
+from Headers.headers import header_confirm
 from Setup.model_setup import Setup
+
+from Code.NewAccount.model_account import NewEmployee
 
 
 def setup():
 
     # Checks whether the file exists
-    if not file_exists(STATEMENT_PATH):
+    if not file_exists(VIDEO_RENTAL_STORE_PATH):
         setup = create_setup()
 
         confirm_setup(setup)
+
+    if not file_exists(EMPLOYEES_PATH):
+        new_employee = NewEmployee
 
 
 def create_setup():
@@ -23,12 +29,12 @@ def create_setup():
 
     number = 1
 
-    while number <= 5:
+    while number <= 8:
         cls()
 
         match number:
             case 1:
-                print(" > Name of Statement")
+                print(" > Name of Video Rental Store")
                 print(" > Ex >> Random Play")
                 try:
                     setup.name = input(" >> ")
@@ -40,7 +46,7 @@ def create_setup():
 
                 number += 1
             case 2:
-                print(" > Creation date of Statement")
+                print(" > Creation date of Video Rental Store")
                 print(" > Ex >> 20-04-2007")
                 try:
                     setup.creation_date = input(" >> ")
@@ -52,10 +58,10 @@ def create_setup():
 
                 number += 1
             case 3:
-                print(" > Statement email ")
+                print(" > Video Rental Store email ")
                 print(" > Ex >> @random.play")
                 try:
-                    setup.statement_email = input(" >> ")
+                    setup.video_rental_store_email = input(" >> ")
 
                 except ValueError as error:
                     print(error)
@@ -65,10 +71,10 @@ def create_setup():
                 number += 1
 
             case 4:
-                print(" > Statement phone ")
+                print(" > Video Rental Store phone ")
                 print(" > Ex >> 936666666")
                 try:
-                    setup.statement_phone = input(" >> ")
+                    setup.video_rental_store_phone = input(" >> ")
 
                 except ValueError as error:
                     print(error)
@@ -78,29 +84,30 @@ def create_setup():
                 number += 1
 
             case 5:
-                print(" > Location Details")
                 print(" > Street")
                 print(" > Ex >> Rua João das Coves")
-                street = input(" >> ")
+                setup.street = input(" >> ")
 
+                number += 1
+
+            case 6:
                 print(" > City")
                 print(" > Ex >> Lisboa")
-                city = input(" >> ")
+                setup.city = input(" >> ")
 
+                number += 1
+
+            case 7:
                 print(" > Region")
                 print(" > Ex >> Grande Lisboa")
-                region = input(" >> ")
+                setup.region = input(" >> ")
 
+                number += 1
+
+            case 8:
                 print(" > Country")
                 print(" > Ex >> Portugal")
-                country = input(" >> ")
-
-                setup.location = {
-                    "street": street,
-                    "city": city,
-                    "region": region,
-                    "country": country,
-                }
+                setup.country = input(" >> ")
 
                 number += 1
 
@@ -109,32 +116,46 @@ def create_setup():
 
 def confirm_setup(setup: Setup):
     while True:
-        print(" > Do you want continue in this configuration")
+        cls()
+
+        print(header_confirm)
+
+        print(setup)
+
+        print("\n > Do you want continue in this configuration")
         print(" > [ Y | N ]")
         confirmation = input(" >> ").upper()
 
         if confirmation == "Y":
-            print(" > Preview")
-            print(f" > {setup}")
-            print(" > Configuration saved")
-            create_json(STATEMENT_PATH, setup.to_dict())
+            print("\n > Preview")
+            print(setup)
+            print("\n > Configuration saved")
+            create_json(VIDEO_RENTAL_STORE_PATH, setup.to_dict())
             press_to_continue()
             break
 
         elif confirmation == "N":
+            cls()
+
             print(" > What do you want to change?")
             print(" [ 1 ] - Name")
             print(" [ 2 ] - Creation Date")
-            print(" [ 3 ] - Statement Email")
-            print(" [ 4 ] - Statement Phone")
+            print(" [ 3 ] - Video Rental Store Email")
+            print(" [ 4 ] - Video Rental Store Phone")
             print(" [ 5 ] - Location")
             print(" [ 0 ] - Exit")
 
-            change_option = catch_number_error(" >> ")
+            try:
+                change_option = catch_number_error(" >> ")
+
+            except ValueError as error:
+                print(error)
+                press_to_continue()
+                continue
 
             match change_option:
                 case 1:
-                    print(" > Name of Statement")
+                    print(" > Name of Video Rental Store")
                     print(" > Ex >> Random Play")
                     try:
                         setup.name = input(" >> ")
@@ -145,7 +166,7 @@ def confirm_setup(setup: Setup):
                         continue
 
                 case 2:
-                    print(" > Creation date of Statement")
+                    print(" > Creation date of Video Rental Store")
                     print(" > Ex >> 20-04-2007")
                     try:
                         setup.creation_date = input(" >> ")
@@ -156,10 +177,10 @@ def confirm_setup(setup: Setup):
                         continue
 
                 case 3:
-                    print(" > Statement email ")
+                    print(" > Video Rental Store email ")
                     print(" > Ex >> @random.play")
                     try:
-                        setup.statement_email = input(" >> ")
+                        setup.video_rental_store_email = input(" >> ")
 
                     except ValueError as error:
                         print(error)
@@ -167,10 +188,10 @@ def confirm_setup(setup: Setup):
                         continue
 
                 case 4:
-                    print(" > Statement phone ")
+                    print(" > Video Rental Store phone ")
                     print(" > Ex >> 936666666")
                     try:
-                        setup.statement_phone = input(" >> ")
+                        setup.video_rental_store_phone = input(" >> ")
 
                     except ValueError as error:
                         print(error)
@@ -178,29 +199,56 @@ def confirm_setup(setup: Setup):
                         continue
 
                 case 5:
-                    print(" > Location ")
-                    print(" > Street")
-                    print(" > Ex >> Rua João das Coves")
-                    street = input(" >> ")
+                    while True:
+                        cls()
 
-                    print(" > City")
-                    print(" > Ex >> Lisboa")
-                    city = input(" >> ")
+                        print(" > What do you want to change?")
+                        print(" [ 1 ] - Street")
+                        print(" [ 2 ] - City")
+                        print(" [ 3 ] - Region")
+                        print(" [ 4 ] - Country")
+                        print(" [ 0 ] - Exit")
 
-                    print(" > Region")
-                    print(" > Ex >> Grande Lisboa")
-                    region = input(" >> ")
+                        try:
+                            change_option = catch_number_error(" >> ")
 
-                    print(" > Country")
-                    print(" > Ex >> Portugal")
-                    country = input(" >> ")
+                        except ValueError as error:
+                            print(error)
+                            press_to_continue()
+                            continue
 
-                    setup.location = {
-                        "street": street,
-                        "city": city,
-                        "region": region,
-                        "country": country,
-                    }
+                        print(" > Location ")
+
+                        match change_option:
+                            case 1:
+                                print(" > Street")
+                                print(" > Ex >> Rua João das Coves")
+                                setup.street = input(" >> ")
+
+                            case 2:
+                                print(" > City")
+                                print(" > Ex >> Lisboa")
+                                setup.city = input(" >> ")
+
+                            case 3:
+                                print(" > Region")
+                                print(" > Ex >> Grande Lisboa")
+                                setup.region = input(" >> ")
+
+                            case 4:
+                                print(" > Country")
+                                print(" > Ex >> Portugal")
+                                setup.country = input(" >> ")
+
+                            case 0:
+                                print(" > Back to confirmation")
+                                press_to_continue()
+                                break
+                            case _:
+                                print(" > [ ERROR ]")
+                                print(" > Enter a validate option")
+                                press_to_continue()
+                                pass
 
                 case 0:
                     print(" > Back to confirmation")
