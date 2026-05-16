@@ -6,18 +6,23 @@ from GenericUtlis.errors import catch_number_error
 from GenericUtlis.files import read_json
 from GenericUtlis.terminal import cls, press_to_continue
 from Headers.headers import header_confirm, header_new_account
-from NewAccount.model_account import NewClient
+from NewAccount.model_account import NewClient, NewEmployee
 from NewAccount.utils_new_account import check_clients_file, save_account
 
 
-def new_account():
+def new_account_client():
 
-    new_account = create_account()
+    new_account = create_account_client()
 
-    confirm_new_account(new_account)
+    confirm_new_account_client(new_account)
 
 
-def create_account():
+def new_account_employee():
+
+    new_account = 
+
+
+def create_account_client():
 
     check_clients_file()
 
@@ -143,8 +148,10 @@ def create_account():
 
     return new_account
 
+def create_account_employee():
+    
 
-def confirm_new_account(new_account: NewClient):
+def confirm_new_account_client(new_account: NewClient):
     while True:
         cls()
 
@@ -177,7 +184,13 @@ def confirm_new_account(new_account: NewClient):
             print(" [ 7 ] - Password")
             print(" [ 0 ] - Exit ")
 
-            change_option = catch_number_error("\n >> ")
+            try:
+                change_option = catch_number_error("\n >> ")
+
+            except ValueError as error:
+                print(error)
+                press_to_continue()
+                continue
 
             match change_option:
                 case 1:
