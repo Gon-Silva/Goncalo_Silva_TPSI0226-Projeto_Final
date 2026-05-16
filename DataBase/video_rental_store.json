@@ -1,0 +1,12 @@
+{
+  "name": "Random PLay",
+  "creation_date": "20-04-2017",
+  "video_rental_store_email": "@random.play",
+  "video_rental_store_phone": "936555222",
+  "location": {
+    "street": "Rua Joao das Coves",
+    "city": "Lisboa",
+    "region": "Grande Lisboa",
+    "country": "Portugal"
+  }
+}
