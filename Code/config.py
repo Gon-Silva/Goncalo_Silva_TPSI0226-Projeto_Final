@@ -1,5 +1,5 @@
 # File with all path
-STATEMENT_PATH = "DataBase/statement.json"
+VIDEO_RENTAL_STORE_PATH = "DataBase/video_rental_store.json"
 MOVIES_PATH = "DataBase/Movies/movies.json"
 CLIENTS_PATH = "DataBase/Clients/clients.json"
 EMPLOYEES_PATH = "DataBase/Employees/employees.json"
