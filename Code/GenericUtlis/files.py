@@ -2,6 +2,9 @@
 import json
 import os
 
+# Path
+from config import CLIENTS_PATH, EMPLOYEES_PATH
+
 
 # Read json file
 # Run a test; if there is an error,
@@ -35,3 +38,21 @@ def create_json(path: str, data: dict):
 # Check if the exists or not
 def file_exists(path: str) -> bool:
     return os.path.isfile(path)
+
+
+# Checks whether the file exists
+def check_file(path: str) -> None:
+    if not file_exists(path):
+        if path == CLIENTS_PATH:
+            create_json(path, {"next_id": 1, "clients": []})
+
+            data = read_json(path)
+            if data is None:
+                create_json(path, {"next_id": 1, "clients": []})
+
+        elif path == EMPLOYEES_PATH:
+            create_json(path, {"next_id": 1, "employees": []})
+
+            data = read_json(path)
+            if data is None:
+                create_json(path, {"next_id": 1, "employees": []})
