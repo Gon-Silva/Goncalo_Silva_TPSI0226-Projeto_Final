@@ -1,6 +1,5 @@
 from config import VIDEO_RENTAL_STORE_PATH
-from GenericUtlis.files import read_json
-from NewAccount.utils_new_account import (
+from GenericUtlis.errors import (
     check_email,
     check_nif,
     check_phone,
@@ -11,6 +10,7 @@ from NewAccount.utils_new_account import (
     validate_nif,
     validate_phone,
 )
+from GenericUtlis.files import read_json
 
 
 class NewAccount:
