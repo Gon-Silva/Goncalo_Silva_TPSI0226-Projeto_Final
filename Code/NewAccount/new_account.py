@@ -155,7 +155,7 @@ def create_account_employee():
 
     check_file(EMPLOYEES_PATH)
 
-    employee_db = read_json(CLIENTS_PATH)
+    employee_db = read_json(EMPLOYEES_PATH)
 
     if employee_db is None:
         employee_db = {"next_id": 1, "employees": []}
@@ -167,6 +167,8 @@ def create_account_employee():
     number = 1
 
     while number <= 6:
+        cls()
+
         match number:
             case 1:
                 print("\n > First Name")
@@ -260,6 +262,8 @@ def create_account_employee():
                         print(" > Enter a validate option")
                         press_to_continue()
                         pass
+
+                number += 1
 
     return new_account
 
@@ -420,9 +424,7 @@ def confirm_new_account_employee(new_account: NewEmployee):
             print(" [ 3 ] - Age")
             print(" [ 4 ] - Phone")
             print(" [ 5 ] - NIF")
-            print(" [ 6 ] - Email")
-            print(" [ 7 ] - Password")
-            print(" [ 8 ] - Role")
+            print(" [ 6 ] - Role")
             print(" [ 0 ] - Exit ")
 
             try:
@@ -483,26 +485,6 @@ def confirm_new_account_employee(new_account: NewEmployee):
                         press_to_continue()
 
                 case 6:
-                    print("\n > Email ")
-                    print(" > Ex >> ana.silva@gmail.com")
-                    try:
-                        new_account.email = input(" >> ")
-
-                    except ValueError as error:
-                        print(error)
-                        press_to_continue()
-
-                case 7:
-                    print("\n > Password ")
-                    print(" > Ex >> Dia-45-89&&&asdasd")
-                    try:
-                        new_account.password = input(" >> ")
-
-                    except ValueError as error:
-                        print(error)
-                        press_to_continue()
-
-                case 8:
                     print("\n > Role")
                     print(" > Select a role")
                     print(" [ 1 ] - Owner")
