@@ -3,7 +3,7 @@ import numbers
 from posix import read
 from xxlimited import new
 
-from config import CLIENTS_PATH, EMPLOYEES_PATH, VIDEO_RENTAL_STORE_PATH
+from config import CLIENTS_PATH, EMPLOYEES_PATH
 
 # My library
 from GenericUtlis.errors import catch_number_error
