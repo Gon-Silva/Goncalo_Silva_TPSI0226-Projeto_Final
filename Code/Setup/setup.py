@@ -6,21 +6,25 @@ from GenericUtlis.errors import catch_number_error
 from GenericUtlis.files import create_json, file_exists
 from GenericUtlis.terminal import cls, press_to_continue
 from Headers.headers import header_confirm
+from NewAccount.new_account import (
+    confirm_new_account_employee,
+    create_account_employee,
+)
 from Setup.model_setup import Setup
-
-from Code.NewAccount.model_account import NewEmployee
 
 
 def setup():
 
-    # Checks whether the file exists
+    # Checks whether the file exis
     if not file_exists(VIDEO_RENTAL_STORE_PATH):
         setup = create_setup()
 
         confirm_setup(setup)
 
     if not file_exists(EMPLOYEES_PATH):
-        new_employee = NewEmployee
+        new_employee = create_account_employee()
+
+        confirm_new_account_employee(new_employee)
 
 
 def create_setup():
