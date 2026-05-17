@@ -1,5 +1,6 @@
 from GenericUtlis.terminal import cls, press_to_continue
 from Headers.headers import header_login
+from Home.Employee.utils_home import home_page
 from Login.utils_login import is_employee, verify_password, verify_user
 
 
@@ -40,8 +41,7 @@ def login():
             continue
 
         if is_employee(email):
-            # Goes to the page of employee
-            print("\n > Welcome to employee page")
+            home_page(client)
 
         else:
             # Goes to the page of client
