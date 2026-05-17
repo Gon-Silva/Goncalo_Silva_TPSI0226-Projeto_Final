@@ -1,3 +1,5 @@
+from config import VIDEO_RENTAL_STORE_PATH
+from GenericUtlis.files import read_json
 from NewAccount.utils_new_account import (
     check_email,
     check_nif,
@@ -9,9 +11,6 @@ from NewAccount.utils_new_account import (
     validate_nif,
     validate_phone,
 )
-
-from Code.config import VIDEO_RENTAL_STORE_PATH
-from Code.GenericUtlis.files import read_json
 
 
 class NewAccount:
@@ -290,20 +289,29 @@ class NewEmployee(NewAccount):
 
     # String representation for debugging/logging
     def __repr__(self) -> str:
+        self.update_email()
+        self.create_temp_password()
         return f"{super().__repr__()}\nrole -> '{self.__role}' ,"
 
     # String for the user (Need improvement)
     def __str__(self) -> str:
+        self.update_email()
+        self.create_temp_password()
         return f"{super().__str__()}\n > Role -> '{self.__role}'"
 
     # Update email with
     def update_email(self) -> None:
         video_rental_store = read_json(VIDEO_RENTAL_STORE_PATH)
-        self.email = f"{self.first_name.lower()}.{self.last_name.lower()}{video_rental_store['email']}"
+        self.email = f"{self.first_name.lower()}.{self.last_name.lower()}{video_rental_store['video_rental_store_email']}"
+
+    # create a temp password
+    def create_temp_password(self) -> None:
+        self.password = "temp-pass"
 
     # Convert the class to dict
     def to_dict(self) -> dict:
         self.update_email()
+        self.create_temp_password()
         base = super().to_dict()
         base["role"] = self.__role
         return base
