@@ -179,7 +179,7 @@ class NewAccount:
             f" > Last Name - {self.__last_name}\n"
             f" > Age - {self.__age}\n"
             f" > Phone - {self.__phone}\n"
-            f" > NIF -> {self.__nif}\n"
+            f" > NIF - {self.__nif}\n"
             f" > Email - {self.__email}\n"
             f" > Password - {self.__password}"
         )
