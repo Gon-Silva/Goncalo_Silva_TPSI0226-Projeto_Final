@@ -1,13 +1,9 @@
-from config import CLIENTS_PATH
-from GenericUtlis.files import read_json
 from GenericUtlis.terminal import cls, press_to_continue
 from Headers.headers import header_login
-from Login.utils_login import verify_password, verify_user
+from Login.utils_login import is_employee, verify_password, verify_user
 
 
 def login():
-
-    data_clients = read_json(CLIENTS_PATH)
     number_of_attempts = 5
 
     while True:
@@ -20,9 +16,10 @@ def login():
             press_to_continue()
             break
 
-        email = input("Email - ")
+        print(" > Email")
+        email = input(" >> ")
 
-        client = verify_user(data_clients, email)
+        client = verify_user(email)
         if client is None:
             print("\nSorry, but your email doesn't exist, please try again\n")
 
@@ -31,7 +28,8 @@ def login():
             press_to_continue()
             continue
 
-        password = input("Password - ")
+        print("\n > Password")
+        password = input(" >> ")
 
         if not verify_password(client, password):
             print("\nSorry, but your password is incorrect, please try again\n")
@@ -41,5 +39,14 @@ def login():
             press_to_continue()
             continue
 
-        print("\nAll right\n")
+        if is_employee(email):
+            # Goes to the page of employee
+            print("\n > Welcome to employee page")
+
+        else:
+            # Goes to the page of client
+            print("\n > Welcome to client page")
+
+        print(" > In development")
         press_to_continue()
+        break
