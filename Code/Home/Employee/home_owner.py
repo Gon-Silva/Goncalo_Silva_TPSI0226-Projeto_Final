@@ -4,6 +4,7 @@
 from GenericUtlis.errors import catch_number_error
 from GenericUtlis.terminal import cls, press_to_continue
 from Headers.headers import header_home_page
+from Management.Clients.client import manage_client
 
 
 def home_page_owner(employee: dict):
@@ -17,7 +18,7 @@ def home_page_owner(employee: dict):
             f" > Welcome {employee['name']['first_name']} {employee['name']['last_name']}"
         )
 
-        print(" > What do you want do to?")
+        print("\n > What do you want do to?")
         print(" [ 1 ] - Manage Customers")
         print(" [ 2 ] - Manage Employees")
         print(" [ 3 ] - Manage Movies")
@@ -37,8 +38,7 @@ def home_page_owner(employee: dict):
 
         match option:
             case 1:
-                # Goes to the page of manage clients
-                print("\n > Welcome to manage clients page")
+                manage_client()
                 pass
 
             case 2:
