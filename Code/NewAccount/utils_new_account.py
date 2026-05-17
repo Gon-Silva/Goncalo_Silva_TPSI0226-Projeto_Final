@@ -10,31 +10,44 @@ from GenericUtlis.files import create_json, file_exists, read_json, write_json
 
 
 # Save account in the database
-def save_account(client: dict):
+def save_account(client: dict, path: str) -> None:
 
-    check_clients_file()
+    check_file(path)
 
-    new_data = read_json(CLIENTS_PATH)
+    new_data = read_json(path)
     new_data["next_id"] += 1
-    new_data["clients"].append(client)
 
-    write_json(CLIENTS_PATH, new_data)
+    if path == CLIENTS_PATH:
+        new_data["clients"].append(client)
+
+    elif path == EMPLOYEES_PATH:
+        new_data["employees"].append(client)
+
+    write_json(path, new_data)
 
 
 # Checks whether the file exists
-def check_clients_file():
-    if not file_exists(CLIENTS_PATH):
-        create_json(CLIENTS_PATH, {"next_id": 1, "clients": []})
+def check_file(path: str) -> None:
+    if not file_exists(path):
+        if path == CLIENTS_PATH:
+            create_json(path, {"next_id": 1, "clients": []})
 
-    data = read_json(CLIENTS_PATH)
-    if data is None:
-        create_json(CLIENTS_PATH, {"next_id": 1, "clients": []})
+            data = read_json(path)
+            if data is None:
+                create_json(path, {"next_id": 1, "clients": []})
+
+        elif path == EMPLOYEES_PATH:
+            create_json(path, {"next_id": 1, "employees": []})
+
+            data = read_json(path)
+            if data is None:
+                create_json(path, {"next_id": 1, "employees": []})
 
 
 # Check if exists email
 def check_email(email: str) -> bool:
 
-    check_clients_file()
+    check_file(CLIENTS_PATH)
 
     clients = read_json(CLIENTS_PATH)
 
@@ -48,7 +61,7 @@ def check_email(email: str) -> bool:
 # Check if exists phone
 def check_phone(phone: str) -> bool:
 
-    check_clients_file()
+    check_file(CLIENTS_PATH)
 
     clients = read_json(CLIENTS_PATH)
     for client in clients["clients"]:
@@ -66,7 +79,7 @@ def check_phone(phone: str) -> bool:
 # Check if exists nif
 def check_nif(nif: str) -> bool:
 
-    check_clients_file()
+    check_file(CLIENTS_PATH)
 
     clients = read_json(CLIENTS_PATH)
 
@@ -75,6 +88,7 @@ def check_nif(nif: str) -> bool:
             return False
 
     employees = read_json(EMPLOYEES_PATH)
+
     for employee in employees["employees"]:
         if employee["nif"] == nif:
             return False
@@ -122,6 +136,7 @@ def validate_name(name: str) -> bool:
     return True
 
 
+# Validate nif
 def validate_nif(nif: str) -> bool:
     if re.match(REGEX_NIF, nif):
         return True
