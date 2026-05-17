@@ -2,18 +2,22 @@
 
 # My Library
 from GenericUtlis.errors import catch_number_error
-from GenericUtlis.terminal import press_to_continue
+from GenericUtlis.terminal import cls, press_to_continue
 from Headers.headers import header_home_page
 
 
 def home_page_employee(employee: dict):
 
     while True:
+        cls()
+
         print(header_home_page)
 
-        print(f" > Welcome {employee['first_name']} {employee['last_name']}")
+        print(
+            f" > Welcome {employee['name']['first_name']} {employee['name']['last_name']}"
+        )
 
-        print(" > What do you want do to?")
+        print("\n > What do you want do to?")
         print(" [ 1 ] - See Customers")
         print(" [ 2 ] - Manage Movies")
         print(" [ 3 ] - Edit Account")
@@ -53,7 +57,3 @@ def home_page_employee(employee: dict):
                 print(" > Enter a validate option")
                 press_to_continue()
                 pass
-
-        print(" > In development")
-        press_to_continue()
-        break
