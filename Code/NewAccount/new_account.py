@@ -1,8 +1,4 @@
 # Path
-import numbers
-from posix import read
-from xxlimited import new
-
 from config import CLIENTS_PATH, EMPLOYEES_PATH
 
 # My library
