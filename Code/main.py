@@ -2,7 +2,7 @@ from GenericUtlis.errors import catch_number_error
 from GenericUtlis.terminal import cls, press_to_continue
 from Headers.headers import header_name_store
 from Login.login import login
-from NewAccount.new_account import new_account
+from NewAccount.new_account import new_account_client
 from Setup.setup import setup
 
 
@@ -37,7 +37,7 @@ def main():
                 login()
                 pass
             case 2:
-                new_account()
+                new_account_client()
                 pass
             case 3:
                 print("\nThank you for using\n")
