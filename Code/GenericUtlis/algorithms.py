@@ -15,13 +15,16 @@ def binary_search(data: list, key: str, value) -> dict | None:
     return None
 
 
-def linear_search_all(data: list, key: str, value) -> list | None:
-    def linear_search_all(data: list, key: str, value) -> list:
-        results = []
-        for item in data:
-            if item[key] == value:
-                results.append(item)
-        return results if results else None
+def linear_search_name(data: list, value, primary_key: str = "name") -> list | None:
+    results = []
+    for item in data:
+        full_name = (
+            f"{item[primary_key]['first_name']} {item[primary_key]['last_name']}"
+        )
+        if value.lower() in full_name.lower():
+            results.append(item)
+
+    return results if results else None
 
 
 def bubble_sort(data: list, key: str, reverse: bool) -> None:
