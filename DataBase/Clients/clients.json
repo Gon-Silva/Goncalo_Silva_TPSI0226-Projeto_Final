@@ -1,5 +1,5 @@
 {
-  "next_id": 5,
+  "next_id": 6,
   "clients": [
     {
       "id": 1,
@@ -42,6 +42,17 @@
       "nif": "260078454",
       "email": "ines.rodriges@gmail.com",
       "password": "rodriges-5",
+      "is_active": true,
+      "subscription_plan": "basic"
+    },
+    {
+      "id": 5,
+      "name": { "first_name": "Miguel", "last_name": "Burro" },
+      "age": 54,
+      "phone": "93278945",
+      "nif": null,
+      "email": "miguel.burro@apple.com",
+      "password": "burro-45",
       "is_active": true,
       "subscription_plan": "basic"
     }
