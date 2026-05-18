@@ -2,7 +2,13 @@
 from GenericUtlis.errors import catch_number_error
 from GenericUtlis.terminal import cls, press_to_continue
 from Headers.headers import header_manage_client
-from Management.utils_management import list_all_clients
+from Management.utils_management import (
+    edit_client,
+    find_client_by_id,
+    list_all_clients,
+    search_for_customer,
+    select_client_by_id,
+)
 
 
 def manage_client():
@@ -15,10 +21,7 @@ def manage_client():
         print(" > What do you want to do?")
         print(" [ 1 ] - List All Customers")
         print(" [ 2 ] - Search For a Customer")
-        print(" [ 3 ] - Edit Customer")
-        print(" [ 4 ] - Remove Customer")
-        print(" [ 5 ] - Sort customers")
-        print(" [ 6 ] - Statistics")
+        print(" [ 3 ] - Sort customers")
         print(" [ 0 ] - Back")
 
         try:
@@ -34,19 +37,10 @@ def manage_client():
                 list_all_clients()
 
             case 2:
-                print("Search For a Customer (by ID, name, email)")
-
-            case 3:
-                print("Edit Customer")
-
-            case 4:
-                print("Remove Customer")
+                search_for_customer()
 
             case 5:
                 print("Sort customers")
-
-            case 6:
-                print("Statistics")
 
             case 0:
                 print("\n > Back to page login")
