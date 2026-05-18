@@ -2,7 +2,7 @@
 from config import CLIENTS_PATH
 
 # My Library
-from GenericUtlis.algorithms import binary_search, linear_search
+from GenericUtlis.algorithms import binary_search, linear_search_name
 from GenericUtlis.errors import catch_number_error
 from GenericUtlis.files import check_file, read_json, write_json
 from GenericUtlis.input import (
@@ -50,8 +50,7 @@ def list_all_clients() -> None:
             while True:
                 print(" > Select a option to continue")
                 print(" [ 1 ] - Continue")
-                print(" [ 2 ] - Edit Account")
-                print(" [ 3 ] - Remove Account")
+                print(" [ 2 ] - Modify Account")
                 print(" [ 0 ] - Leave")
 
                 try:
@@ -67,42 +66,7 @@ def list_all_clients() -> None:
                         break
 
                     case 2:
-                        print("\n > Select an id")
-                        try:
-                            id = catch_number_error(" >> ")
-
-                        except ValueError as error:
-                            print(error)
-                            press_to_continue()
-                            continue
-
-                        client = find_client_by_id(id)
-
-                        if client is None:
-                            print("\n > Sorry but this id doesn't exist")
-                            press_to_continue()
-                            continue
-
-                        edit_client(client)
-
-                    case 3:
-                        print("\n > Select an id")
-                        try:
-                            id = catch_number_error(" >> ")
-
-                        except ValueError as error:
-                            print(error)
-                            press_to_continue()
-                            continue
-
-                        client = find_client_by_id(id)
-
-                        if client is None:
-                            print("\n > Sorry but this id doesn't exist")
-                            press_to_continue()
-                            continue
-
-                        remove_client(client)
+                        select_client_by_id()
 
                     case 0:
                         print("\n > Back to page login")
@@ -122,14 +86,147 @@ def list_all_clients() -> None:
     press_to_continue()
 
 
+def search_for_customer() -> None:
+
+    while True:
+        cls()
+
+        print(" > Search For a Customer")
+        print(" [ 1 ] - ID")
+        print(" [ 2 ] - Name")
+        print(" [ 0 ] - Back")
+
+        try:
+            option = catch_number_error("\n >> ")
+
+        except ValueError as error:
+            print(error)
+            press_to_continue()
+            continue
+
+        match option:
+            case 1:
+                select_client_by_id()
+
+            case 2:
+                select_client_by_name()
+
+            case 0:
+                print("\n > Back to manage client page")
+                press_to_continue()
+                break
+
+            case _:
+                print("\n > [ ERROR ]")
+                print(" > Enter a validate option")
+                press_to_continue()
+                pass
+
+
 def show_client(client: dict) -> None:
     print(f"\n > Client ID - {client['id']}")
     print(f"  > Name - {client['name']['first_name']} {client['name']['last_name']}")
     print(f"  > Age - {client['age']}")
+    print(f"  > Nif - {client['nif']}")
     print(f"  > Email - {client['email']}")
     print(f"  > Phone - {client['phone']}")
     print(f"  > Subcription Plan - {client['subscription_plan']}")
     print(f"  > Active - {client['is_active']}")
+
+
+def modify_menu(client: dict) -> None:
+    while True:
+        cls()
+
+        show_client(client)
+
+        print("\n > Select a option to continue")
+        print(" [ 1 ] - Edit")
+        print(" [ 2 ] - Disable")
+        print(" [ 3 ] - Activate")
+        print(" [ 4 ] - Delete")
+        print(" [ 0 ] - Back")
+
+        try:
+            option = catch_number_error("\n >> ")
+
+        except ValueError as error:
+            print(error)
+            press_to_continue()
+            continue
+
+        match option:
+            case 1:
+                edit_client(client)
+
+            case 2:
+                disable_client(client)
+
+            case 3:
+                activate_account(client)
+
+            case 4:
+                delete_account(client)
+
+            case 0:
+                print("\n > Back to page login")
+                press_to_continue()
+                break
+
+            case _:
+                print("\n > [ ERROR ]")
+                print(" > Enter a validate option")
+                press_to_continue()
+                pass
+
+
+def select_client_by_id() -> None:
+    while True:
+        print("\n > Select an id")
+        try:
+            id = catch_number_error(" >> ")
+
+        except ValueError as error:
+            print(error)
+            press_to_continue()
+            continue
+
+        client = find_client_by_id(id)
+
+        if client is None:
+            print("\n > Sorry but this id doesn't exist")
+            press_to_continue()
+            continue
+
+        modify_menu(client)
+        break
+
+
+def select_client_by_name() -> None:
+    while True:
+        cls()
+
+        print("\n Enter a name")
+        try:
+            name = input_name(" >> ")
+
+        except ValueError as error:
+            print(error)
+            press_to_continue()
+            continue
+
+        clients = find_client_by_name(name)
+
+        if clients is None:
+            print("\n > Sorry but this name doesn't exist")
+            press_to_continue()
+            continue
+
+        for client in clients:
+            show_client(client)
+
+        select_client_by_id()
+        break
 
 
 def find_client_by_id(id: int) -> dict | None:
@@ -137,9 +234,9 @@ def find_client_by_id(id: int) -> dict | None:
     return binary_search(clients, "id", id)
 
 
-def find_client_by_name(name: str) -> dict | None:
+def find_client_by_name(name: str) -> list | None:
     clients = read_json(CLIENTS_PATH)["clients"]
-    return linear_search(clients, "name", name)
+    return linear_search_name(clients, name, "name")
 
 
 def edit_client(client: dict) -> None:
@@ -149,7 +246,7 @@ def edit_client(client: dict) -> None:
 
         show_client(client)
 
-        print(" > What do you want to change?")
+        print("\n > What do you want to change?")
         print(" [ 1 ] - Fisrt Name")
         print(" [ 2 ] - Last Name")
         print(" [ 3 ] - Age")
@@ -170,7 +267,7 @@ def edit_client(client: dict) -> None:
 
         match change_option:
             case 1:
-                print(" > Change First Name")
+                print("\n > Change First Name")
                 try:
                     client["name"]["first_name"] = input_name(" >> ")
 
@@ -180,7 +277,7 @@ def edit_client(client: dict) -> None:
                     break
 
             case 2:
-                print(" > Change Last Name")
+                print("\n > Change Last Name")
                 try:
                     client["name"]["last_name"] = input_name(" >> ")
 
@@ -190,7 +287,7 @@ def edit_client(client: dict) -> None:
                     break
 
             case 3:
-                print(" > Change Age")
+                print("\n > Change Age")
                 try:
                     client["age"] = input_age(" >> ")
 
@@ -200,6 +297,7 @@ def edit_client(client: dict) -> None:
                     break
 
             case 4:
+                print("\n > Change Phone")
                 try:
                     client["phone"] = input_phone(" >> ")
 
@@ -209,6 +307,7 @@ def edit_client(client: dict) -> None:
                     break
 
             case 5:
+                print("\n > Change Nif")
                 try:
                     client["nif"] = input_nif(" >> ")
 
@@ -218,6 +317,7 @@ def edit_client(client: dict) -> None:
                     break
 
             case 6:
+                print("\n > Change Email")
                 try:
                     client["email"] = input_email_client(" >> ")
 
@@ -227,6 +327,7 @@ def edit_client(client: dict) -> None:
                     break
 
             case 7:
+                print("\n > Change Password")
                 try:
                     client["password"] = input_password(" >> ")
 
@@ -244,7 +345,7 @@ def edit_client(client: dict) -> None:
                 save_client(client)
                 print("\n > Client edit successfully")
                 press_to_continue()
-                pass
+                break
 
             case _:
                 print("\n > [ ERROR ]")
@@ -253,24 +354,89 @@ def edit_client(client: dict) -> None:
                 pass
 
 
-def remove_client(client: dict) -> None:
+def disable_client(client: dict) -> None:
     while True:
         cls()
 
         show_client(client)
 
-        print(" > Do you want remove this user")
+        print("\n > Do you want disable this user")
+        print(" > [ Y | N ]")
+        want_disable = input(" >> ").upper()
+
+        if want_disable == "Y":
+            client["is_active"] = False
+            save_client(client)
+            print("\n > Client disabled successfully")
+            press_to_continue()
+            break
+
+        elif want_disable == "N":
+            break
+
+        else:
+            print("\n > [ ERROR ]")
+            print(" > Enter a validate option")
+            press_to_continue()
+
+
+def activate_account(client: dict) -> None:
+    while True:
+        cls()
+
+        show_client(client)
+
+        print("\n > Do you want activate this user")
+        print(" > [ Y | N ]")
+        want_activate = input(" >> ").upper()
+
+        if want_activate == "Y":
+            client["is_active"] = True
+            save_client(client)
+            print("\n > Client activated successfully")
+            press_to_continue()
+            break
+
+        elif want_activate == "N":
+            break
+
+        else:
+            print("\n > [ ERROR ]")
+            print(" > Enter a validate option")
+            press_to_continue()
+
+
+def delete_account(client: dict) -> None:
+    db = read_json(CLIENTS_PATH)
+    clients_list = db["clients"]
+
+    while True:
+        cls()
+
+        show_client(client)
+
+        print("\n > Do you want delete this user")
         print(" > [ Y | N ]")
         want_remove = input(" >> ").upper()
 
         if want_remove == "Y":
-            client["is_active"] = False
-            save_client(client)
+            client_id = client["id"]
+
+            updated_clients = []
+
+            for clt in clients_list:
+                if clt["id"] != client_id:
+                    updated_clients.append(clt)
+
+            db["clients"] = updated_clients
+
+            write_json(CLIENTS_PATH, db)
             print("\n > Client removed successfully")
             press_to_continue()
+            break
 
         elif want_remove == "N":
-            return None
+            break
 
         else:
             print("\n > [ ERROR ]")
