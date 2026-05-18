@@ -4,6 +4,14 @@ from config import CLIENTS_PATH, EMPLOYEES_PATH
 # My library
 from GenericUtlis.errors import catch_number_error
 from GenericUtlis.files import read_json
+from GenericUtlis.input import (
+    input_age,
+    input_email_client,
+    input_name,
+    input_nif,
+    input_password,
+    input_phone,
+)
 from GenericUtlis.terminal import cls, press_to_continue
 from Headers.headers import header_confirm, header_new_account
 from NewAccount.model_account import NewClient, NewEmployee
@@ -49,7 +57,7 @@ def create_account_client():
                 print("\n > First Name")
                 print(" > Ex >> Ana")
                 try:
-                    new_account.first_name = input(" >> ")
+                    new_account.first_name = input_name(" >> ")
 
                 except ValueError as error:
                     print(error)
@@ -62,7 +70,7 @@ def create_account_client():
                 print("\n > Last Name")
                 print(" > Ex >> Silva")
                 try:
-                    new_account.last_name = input(" >> ")
+                    new_account.last_name = input_name(" >> ")
                 except ValueError as error:
                     print(error)
                     press_to_continue()
@@ -74,7 +82,7 @@ def create_account_client():
                 print("\n > Age")
                 print(" > Ex >> 18")
                 try:
-                    new_account.age = catch_number_error(" >> ")
+                    new_account.age = input_age(" >> ")
 
                 except ValueError as error:
                     print(error)
@@ -87,7 +95,7 @@ def create_account_client():
                 print("\n > Phone")
                 print(" > Ex >> 932751849")
                 try:
-                    new_account.phone = input(" >> ")
+                    new_account.phone = input_phone(" >> ")
 
                 except ValueError as error:
                     print(error)
@@ -105,7 +113,7 @@ def create_account_client():
                     print("\n > NIF")
                     print(" > Ex >> 267887954")
                     try:
-                        new_account.nif = input(" >> ")
+                        new_account.nif = input_nif(" >> ")
 
                     except ValueError as error:
                         print(error)
@@ -115,6 +123,7 @@ def create_account_client():
                     number += 1
 
                 elif confirmation == "N":
+                    new_account.nif = None
                     number += 1
 
                 else:
@@ -126,7 +135,7 @@ def create_account_client():
                 print("\n > Email ")
                 print(" > Ex >> ana.silva@gmail.com")
                 try:
-                    new_account.email = input(" >> ")
+                    new_account.email = input_email_client(" >> ")
 
                 except ValueError as error:
                     print(error)
@@ -139,7 +148,7 @@ def create_account_client():
                 print("\n > Password ")
                 print(" > Ex >> Dia-45-89&&&asdasd")
                 try:
-                    new_account.password = input(" >> ")
+                    new_account.password = input_password(" >> ")
 
                 except ValueError as error:
                     print(error)
@@ -174,7 +183,7 @@ def create_account_employee():
                 print("\n > First Name")
                 print(" > Ex >> Ana")
                 try:
-                    new_account.first_name = input(" >> ")
+                    new_account.first_name = input_name(" >> ")
 
                 except ValueError as error:
                     print(error)
@@ -187,7 +196,7 @@ def create_account_employee():
                 print("\n > Last Name")
                 print(" > Ex >> Silva")
                 try:
-                    new_account.last_name = input(" >> ")
+                    new_account.last_name = input_name(" >> ")
                 except ValueError as error:
                     print(error)
                     press_to_continue()
@@ -199,7 +208,7 @@ def create_account_employee():
                 print("\n > Age")
                 print(" > Ex >> 18")
                 try:
-                    new_account.age = catch_number_error(" >> ")
+                    new_account.age = input_age(" >> ")
 
                 except ValueError as error:
                     print(error)
@@ -212,7 +221,7 @@ def create_account_employee():
                 print("\n > Phone")
                 print(" > Ex >> 932751849")
                 try:
-                    new_account.phone = input(" >> ")
+                    new_account.phone = input_phone(" >> ")
 
                 except ValueError as error:
                     print(error)
@@ -225,7 +234,7 @@ def create_account_employee():
                 print("\n > NIF")
                 print(" > Ex >> 267887954")
                 try:
-                    new_account.nif = input(" >> ")
+                    new_account.nif = input_nif(" >> ")
 
                 except ValueError as error:
                     print(error)
@@ -314,7 +323,7 @@ def confirm_new_account_client(new_account: NewClient):
                     print("\n > First Name")
                     print(" > Ex >> Ana")
                     try:
-                        new_account.first_name = input(" >> ")
+                        new_account.first_name = input_name(" >> ")
                     except ValueError as error:
                         print(error)
                         press_to_continue()
@@ -323,7 +332,7 @@ def confirm_new_account_client(new_account: NewClient):
                     print("\n > Last Name")
                     print(" > Ex >> Silva")
                     try:
-                        new_account.last_name = input(" >> ")
+                        new_account.last_name = input_name(" >> ")
                     except ValueError as error:
                         print(error)
                         press_to_continue()
@@ -332,7 +341,7 @@ def confirm_new_account_client(new_account: NewClient):
                     print("\n > Age")
                     print(" > Ex >> 18")
                     try:
-                        new_account.age = catch_number_error(" >> ")
+                        new_account.age = input_age(" >> ")
 
                     except ValueError as error:
                         print(error)
@@ -342,7 +351,7 @@ def confirm_new_account_client(new_account: NewClient):
                     print("\n > Phone")
                     print(" > Ex >> 932751849")
                     try:
-                        new_account.phone = input(" >> ")
+                        new_account.phone = input_phone(" >> ")
 
                     except ValueError as error:
                         print(error)
@@ -352,7 +361,7 @@ def confirm_new_account_client(new_account: NewClient):
                     print("\n > NIF")
                     print(" > Ex >> 267887954")
                     try:
-                        new_account.nif = input(" >> ")
+                        new_account.nif = input_nif(" >> ")
 
                     except ValueError as error:
                         print(error)
@@ -362,7 +371,7 @@ def confirm_new_account_client(new_account: NewClient):
                     print("\n > Email ")
                     print(" > Ex >> ana.silva@gmail.com")
                     try:
-                        new_account.email = input(" >> ")
+                        new_account.email = input_email_client(" >> ")
 
                     except ValueError as error:
                         print(error)
@@ -372,7 +381,7 @@ def confirm_new_account_client(new_account: NewClient):
                     print("\n > Password ")
                     print(" > Ex >> Dia-45-89&&&asdasd")
                     try:
-                        new_account.password = input(" >> ")
+                        new_account.password = input_password(" >> ")
 
                     except ValueError as error:
                         print(error)
@@ -440,7 +449,7 @@ def confirm_new_account_employee(new_account: NewEmployee):
                     print("\n > First Name")
                     print(" > Ex >> Ana")
                     try:
-                        new_account.first_name = input(" >> ")
+                        new_account.first_name = input_name(" >> ")
                     except ValueError as error:
                         print(error)
                         press_to_continue()
@@ -449,7 +458,7 @@ def confirm_new_account_employee(new_account: NewEmployee):
                     print("\n > Last Name")
                     print(" > Ex >> Silva")
                     try:
-                        new_account.last_name = input(" >> ")
+                        new_account.last_name = input_name(" >> ")
                     except ValueError as error:
                         print(error)
                         press_to_continue()
@@ -458,7 +467,7 @@ def confirm_new_account_employee(new_account: NewEmployee):
                     print("\n > Age")
                     print(" > Ex >> 18")
                     try:
-                        new_account.age = catch_number_error(" >> ")
+                        new_account.age = input_age(" >> ")
 
                     except ValueError as error:
                         print(error)
@@ -468,7 +477,7 @@ def confirm_new_account_employee(new_account: NewEmployee):
                     print("\n > Phone")
                     print(" > Ex >> 932751849")
                     try:
-                        new_account.phone = input(" >> ")
+                        new_account.phone = input_phone(" >> ")
 
                     except ValueError as error:
                         print(error)
@@ -478,7 +487,7 @@ def confirm_new_account_employee(new_account: NewEmployee):
                     print("\n > NIF")
                     print(" > Ex >> 267887954")
                     try:
-                        new_account.nif = input(" >> ")
+                        new_account.nif = input_nif(" >> ")
 
                     except ValueError as error:
                         print(error)

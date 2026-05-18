@@ -1,16 +1,5 @@
 from config import VIDEO_RENTAL_STORE_PATH
 from GenericUtlis.files import read_json
-from NewAccount.utils_new_account import (
-    check_email,
-    check_nif,
-    check_phone,
-    validate_age,
-    validate_email,
-    validate_len_password,
-    validate_name,
-    validate_nif,
-    validate_phone,
-)
 
 
 class NewAccount:
@@ -91,66 +80,36 @@ class NewAccount:
     @first_name.setter
     def first_name(self, first_name: str) -> None:
         """Set first name"""
-        if not validate_name(first_name):
-            raise ValueError("Invalid first name size")
-
         self.__first_name = first_name
 
     @last_name.setter
     def last_name(self, last_name: str) -> None:
         """Set last name"""
-        if not validate_name(last_name):
-            raise ValueError("Invalid last name size")
-
         self.__last_name = last_name
 
     @age.setter
     def age(self, age: int) -> None:
         """Set age"""
-        if not validate_age(age):
-            raise ValueError("Invalid age")
-
         self.__age = age
 
     @phone.setter
     def phone(self, phone: str) -> None:
         """Set phone"""
-        if not validate_phone(phone):
-            raise ValueError("Invalid phone format")
-
-        if not check_phone(phone):
-            raise ValueError("This phone already exists")
-
         self.__phone = phone
 
     @nif.setter
     def nif(self, nif: str) -> None:
         """Set NIF"""
-        if not validate_nif(nif):
-            raise ValueError("Invalid NIF formant")
-
-        if not check_nif(nif):
-            raise ValueError("This nif already exists")
-
         self.__nif = nif
 
     @email.setter
     def email(self, email: str) -> None:
         """Set email"""
-        if not validate_email(email):
-            raise ValueError("Invalid email format")
-
-        if not check_email(email):
-            raise ValueError("This email address already exists")
-
         self.__email = email
 
     @password.setter
     def password(self, password: str) -> None:
         """Set password"""
-        if not validate_len_password(password):
-            raise ValueError("Invalid passowrd size")
-
         self.__password = password
 
     @is_active.setter
@@ -179,7 +138,7 @@ class NewAccount:
             f" > Last Name - {self.__last_name}\n"
             f" > Age - {self.__age}\n"
             f" > Phone - {self.__phone}\n"
-            f" > NIF -> {self.__nif}\n"
+            f" > NIF - {self.__nif}\n"
             f" > Email - {self.__email}\n"
             f" > Password - {self.__password}"
         )
