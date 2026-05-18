@@ -46,7 +46,6 @@ def login():
         else:
             # Goes to the page of client
             print("\n > Welcome to client page")
-
-        print(" > In development")
-        press_to_continue()
-        break
+            print(" > In development")
+            press_to_continue()
+            break
