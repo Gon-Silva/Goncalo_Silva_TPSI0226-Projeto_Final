@@ -3,11 +3,8 @@ from GenericUtlis.errors import catch_number_error
 from GenericUtlis.terminal import cls, press_to_continue
 from Headers.headers import header_manage_client
 from Management.utils_management import (
-    edit_client,
-    find_client_by_id,
     list_all_clients,
     search_for_customer,
-    select_client_by_id,
 )
 
 
@@ -40,7 +37,9 @@ def manage_client():
                 search_for_customer()
 
             case 5:
-                print("Sort customers")
+                print(" > Sort customers")
+                print(" > In development")
+                press_to_continue()
 
             case 0:
                 print("\n > Back to page login")
