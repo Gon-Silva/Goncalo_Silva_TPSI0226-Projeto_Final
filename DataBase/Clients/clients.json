@@ -1,5 +1,5 @@
 {
-  "next_id": 2,
+  "next_id": 5,
   "clients": [
     {
       "id": 1,
@@ -9,6 +9,39 @@
       "nif": "267887954",
       "email": "ana.silva@gmail.com",
       "password": "Dia-4589",
+      "is_active": true,
+      "subscription_plan": "basic"
+    },
+    {
+      "id": 2,
+      "name": { "first_name": "Joao", "last_name": "Esteves" },
+      "age": 16,
+      "phone": "96874489",
+      "nif": "",
+      "email": "joao.esteves@proton.me",
+      "password": "joao-esteves-34",
+      "is_active": true,
+      "subscription_plan": "basic"
+    },
+    {
+      "id": 3,
+      "name": { "first_name": "Rui", "last_name": "Manuel" },
+      "age": 29,
+      "phone": "932784965",
+      "nif": "",
+      "email": "rui.manuel@gmail.com",
+      "password": "manuel-84",
+      "is_active": true,
+      "subscription_plan": "basic"
+    },
+    {
+      "id": 4,
+      "name": { "first_name": "Ines", "last_name": "Rodriges" },
+      "age": 26,
+      "phone": "932754789",
+      "nif": "260078454",
+      "email": "ines.rodriges@gmail.com",
+      "password": "rodriges-5",
       "is_active": true,
       "subscription_plan": "basic"
     }
