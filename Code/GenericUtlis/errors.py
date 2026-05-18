@@ -2,26 +2,31 @@
 import re
 
 # Path
-from config import CLIENTS_PATH, EMPLOYEES_PATH, REGEX_EMAIL, REGEX_NIF, REGEX_PHONE
+from config import (
+    CLIENTS_PATH,
+    EMPLOYEES_PATH,
+    REGEX_EMAIL,
+    REGEX_NIF,
+    REGEX_PHONE,
+    VIDEO_RENTAL_STORE_PATH,
+)
 
 # My Library
 from GenericUtlis.files import (
     check_file,
     read_json,
-    write_json,
 )
 
 
 def catch_number_error(message: str):
-    while True:
-        try:
-            return int(input(message))
-        except ValueError:
-            raise ValueError("\n[ERROR] The input must be a number")
+    try:
+        return int(input(message))
+    except ValueError:
+        raise ValueError("\n[ERROR] The input must be a number")
 
 
-# Check if exists email
-def check_email(email: str) -> bool:
+# Check if exists email in client db
+def check_email_client(email: str) -> bool:
 
     check_file(CLIENTS_PATH)
 
@@ -30,6 +35,32 @@ def check_email(email: str) -> bool:
     for client in clients["clients"]:
         if client["email"] == email:
             return False
+
+    return True
+
+
+# Check if exists email in client db
+def check_email_employee(email: str) -> bool:
+
+    check_file(EMPLOYEES_PATH)
+
+    employees = read_json(EMPLOYEES_PATH)
+
+    for employee in employees["clients"]:
+        if employee["email"] == email:
+            return False
+
+    return True
+
+
+# Checks if the email address belongs to the store's domain
+def check_domain_store(email: str) -> bool:
+
+    video_rental_store = read_json(VIDEO_RENTAL_STORE_PATH)
+
+    domain = video_rental_store["video_rental_store_email"]
+    if email.endswith(domain):
+        return False
 
     return True
 
