@@ -123,6 +123,7 @@ def create_account_client():
                     number += 1
 
                 elif confirmation == "N":
+                    new_account.nif = None
                     number += 1
 
                 else:
@@ -182,7 +183,7 @@ def create_account_employee():
                 print("\n > First Name")
                 print(" > Ex >> Ana")
                 try:
-                    new_account.first_name = input(" >> ")
+                    new_account.first_name = input_name(" >> ")
 
                 except ValueError as error:
                     print(error)
@@ -195,7 +196,7 @@ def create_account_employee():
                 print("\n > Last Name")
                 print(" > Ex >> Silva")
                 try:
-                    new_account.last_name = input(" >> ")
+                    new_account.last_name = input_name(" >> ")
                 except ValueError as error:
                     print(error)
                     press_to_continue()
@@ -207,7 +208,7 @@ def create_account_employee():
                 print("\n > Age")
                 print(" > Ex >> 18")
                 try:
-                    new_account.age = catch_number_error(" >> ")
+                    new_account.age = input_age(" >> ")
 
                 except ValueError as error:
                     print(error)
@@ -220,7 +221,7 @@ def create_account_employee():
                 print("\n > Phone")
                 print(" > Ex >> 932751849")
                 try:
-                    new_account.phone = input(" >> ")
+                    new_account.phone = input_phone(" >> ")
 
                 except ValueError as error:
                     print(error)
@@ -233,7 +234,7 @@ def create_account_employee():
                 print("\n > NIF")
                 print(" > Ex >> 267887954")
                 try:
-                    new_account.nif = input(" >> ")
+                    new_account.nif = input_nif(" >> ")
 
                 except ValueError as error:
                     print(error)
@@ -448,7 +449,7 @@ def confirm_new_account_employee(new_account: NewEmployee):
                     print("\n > First Name")
                     print(" > Ex >> Ana")
                     try:
-                        new_account.first_name = input(" >> ")
+                        new_account.first_name = input_name(" >> ")
                     except ValueError as error:
                         print(error)
                         press_to_continue()
@@ -457,7 +458,7 @@ def confirm_new_account_employee(new_account: NewEmployee):
                     print("\n > Last Name")
                     print(" > Ex >> Silva")
                     try:
-                        new_account.last_name = input(" >> ")
+                        new_account.last_name = input_name(" >> ")
                     except ValueError as error:
                         print(error)
                         press_to_continue()
@@ -466,7 +467,7 @@ def confirm_new_account_employee(new_account: NewEmployee):
                     print("\n > Age")
                     print(" > Ex >> 18")
                     try:
-                        new_account.age = catch_number_error(" >> ")
+                        new_account.age = input_age(" >> ")
 
                     except ValueError as error:
                         print(error)
@@ -476,7 +477,7 @@ def confirm_new_account_employee(new_account: NewEmployee):
                     print("\n > Phone")
                     print(" > Ex >> 932751849")
                     try:
-                        new_account.phone = input(" >> ")
+                        new_account.phone = input_phone(" >> ")
 
                     except ValueError as error:
                         print(error)
@@ -486,7 +487,7 @@ def confirm_new_account_employee(new_account: NewEmployee):
                     print("\n > NIF")
                     print(" > Ex >> 267887954")
                     try:
-                        new_account.nif = input(" >> ")
+                        new_account.nif = input_nif(" >> ")
 
                     except ValueError as error:
                         print(error)
